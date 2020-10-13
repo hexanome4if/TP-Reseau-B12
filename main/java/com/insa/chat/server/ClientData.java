@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.insa.chat.server;
 
 import java.io.IOException;
@@ -12,17 +7,31 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author polo
  */
 public class ClientData {
-    private Socket socket;
+    /**
+     * Client socket
+     */
+    private final Socket socket;
+
+    /**
+     * Object output stream to send a message to the client
+     */
     private ObjectOutputStream outputStream;
+
+    /**
+     * Client pseudo
+     */
     private String pseudo;
 
-    public ClientData(Socket socket, String pseudo) {
+    /**
+     * Create a new client data for a given client represented by it's socket
+     * @param socket the client socket
+     */
+    public ClientData(Socket socket) {
         this.socket = socket;
-        this.pseudo = pseudo;
+        this.pseudo = "";
         try {
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException ex) {
@@ -30,26 +39,34 @@ public class ClientData {
         }
     }
 
+    /**
+     * Get the client socket
+     * @return client socket
+     */
     public Socket getSocket() {
         return socket;
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
-    }
-
+    /**
+     * Get the output stream to send a message to the client
+     * @return object output stream
+     */
     public ObjectOutputStream getOutputStream() {
         return outputStream;
     }
 
-    public void setOutputStream(ObjectOutputStream outputStream) {
-        this.outputStream = outputStream;
-    }
-
+    /**
+     * Get client pseudo
+     * @return client pseudo
+     */
     public String getPseudo() {
         return pseudo;
     }
 
+    /**
+     * Set client pseudo
+     * @param pseudo new client pseudo
+     */
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }

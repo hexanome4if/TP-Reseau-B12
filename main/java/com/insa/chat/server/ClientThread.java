@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.insa.chat.server;
 
 import com.insa.chat.core.GlobalMessage;
@@ -13,28 +8,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author polo
  */
 public class ClientThread extends Thread {
-    
-    private Socket clientSocket;
-    private ObjectInputStream reader;
+    /**
+     * Current client socket
+     */
+    private final Socket clientSocket;
 
+    /**
+     * Infinite receive loop handler
+     */
+    private boolean stopLoop = false;
+
+    /**
+     * Create a new thread to handle a specific client identified by it's socket by listening to it's messages
+     * @param clientSocket the client socket
+     */
     public ClientThread(Socket clientSocket) {
         this.clientSocket = clientSocket;
+        // Add the client to the client container
+        ClientContainer.addClient(clientSocket);
     }
-    
-    
 
     @Override
     public void run() {
         try {
-            reader = new ObjectInputStream(clientSocket.getInputStream());
-            
-            while (true) {
+            ObjectInputStream reader = new ObjectInputStream(clientSocket.getInputStream());
+            while (!stopLoop) {
                 try {
-                    GlobalMessage message = (GlobalMessage)reader.readObject();
+                    GlobalMessage message = (GlobalMessage) reader.readObject();
                     handleMessage(message);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,13 +49,20 @@ public class ClientThread extends Thread {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
+    /**
+     * Handle and treat a new message from the client
+     * @param message the message sent by the client
+     */
     private void handleMessage(GlobalMessage message) {
         switch (message.getType()) {
-            case "message": {
-                MainServer.
-                break;
+            case "message" -> {
+                MainServer.broadcastMessage(message, clientSocket);
+            }
+            case "disconnect" -> {
+                // TODO tell other people
+                stopLoop = true;
+                ClientContainer.removeClient(clientSocket);
             }
         }
     }

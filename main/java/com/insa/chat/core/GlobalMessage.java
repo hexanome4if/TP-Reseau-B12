@@ -1,28 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.insa.chat.core;
 
-/**
- *
- * @author polo
- */
-public class GlobalMessage {
-    
-    private String type;
-    private String data;
-    
+import java.io.Serializable;
+
+public class GlobalMessage implements Serializable {
+    /**
+     * Message type can be "message" | "set_pseudo" | "disconnect"
+     */
+    private final String type;
+
+    /**
+     * Message data corresponding to the message type
+     */
+    private final String data;
+
+    /**
+     * Create a new global message to send over network
+     * @param type message type
+     * @param data message data
+     */
     public GlobalMessage(String type, String data) {
         this.type = type;
         this.data = data;
     }
 
+    /**
+     * Get message type
+     * @return message type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Get message data
+     * @return message data
+     */
     public String getData() {
         return data;
     }
