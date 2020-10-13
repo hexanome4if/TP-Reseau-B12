@@ -56,13 +56,15 @@ public class ClientThread extends Thread {
      */
     private void handleMessage(GlobalMessage message) {
         switch (message.getType()) {
-            case "message" -> {
+            case "message": {
                 MainServer.broadcastMessage(message, clientSocket);
+                break;
             }
-            case "disconnect" -> {
+            case "disconnect": {
                 // TODO tell other people
                 stopLoop = true;
                 ClientContainer.removeClient(clientSocket);
+                break;
             }
         }
     }
