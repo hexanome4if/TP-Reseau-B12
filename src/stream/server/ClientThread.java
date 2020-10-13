@@ -1,9 +1,8 @@
-package com.insa.chat.server;
+package stream.server;
 
-import com.insa.chat.core.GlobalMessage;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.Socket;
+import stream.core.GlobalMessage;
+import java.io.*;
+import java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +19,8 @@ public class ClientThread extends Thread {
      * Infinite receive loop handler
      */
     private boolean stopLoop = false;
+
+    private String pseudo = "";
 
     /**
      * Create a new thread to handle a specific client identified by it's socket by listening to it's messages
@@ -42,9 +43,11 @@ public class ClientThread extends Thread {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
-            
+
+        } catch (EOFException ex) {
+          disconnect();
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,16 +60,27 @@ public class ClientThread extends Thread {
     private void handleMessage(GlobalMessage message) {
         switch (message.getType()) {
             case "message": {
-                MainServer.broadcastMessage(message, clientSocket);
+                MainServer.broadcastMessage(new GlobalMessage(pseudo,"message",message.getData()), clientSocket);
                 break;
             }
             case "disconnect": {
-                // TODO tell other people
-                stopLoop = true;
-                ClientContainer.removeClient(clientSocket);
+                disconnect();
+                MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);
                 break;
+            }
+            case "connect": {
+              ClientContainer.getClient(clientSocket).setPseudo(message.getPseudo());
+              pseudo = message.getPseudo();
+              MainServer.broadcastMessage(message, clientSocket);
+              break;
             }
         }
     }
-    
+
+    private void disconnect() {
+      // TODO tell other people
+      stopLoop = true;
+      ClientContainer.removeClient(clientSocket);
+    }
+
 }

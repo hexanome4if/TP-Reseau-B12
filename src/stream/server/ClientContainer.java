@@ -1,4 +1,4 @@
-package com.insa.chat.server;
+package stream.server;
 
 import java.net.Socket;
 import java.util.Collection;
@@ -11,10 +11,10 @@ import java.util.Map;
 public class ClientContainer {
     /**
      * Connected clients list
-     * @see ClientContainer#getClient(Socket) 
-     * @see ClientContainer#getClients() 
-     * @see ClientContainer#addClient(Socket) 
-     * @see ClientContainer#removeClient(Socket) 
+     * @see ClientContainer#getClient(Socket)
+     * @see ClientContainer#getClients()
+     * @see ClientContainer#addClient(Socket)
+     * @see ClientContainer#removeClient(Socket)
      */
     private static final Map<String, ClientData> clients = new HashMap<>();
 

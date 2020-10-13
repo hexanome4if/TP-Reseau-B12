@@ -1,4 +1,4 @@
-package com.insa.chat.server;
+package stream.server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -31,7 +31,7 @@ public class ClientData {
      */
     public ClientData(Socket socket) {
         this.socket = socket;
-        this.pseudo = "";
+        this.pseudo = null;
         try {
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException ex) {
@@ -70,7 +70,7 @@ public class ClientData {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
-    
-    
-            
+
+
+
 }

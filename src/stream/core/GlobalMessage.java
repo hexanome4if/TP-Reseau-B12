@@ -1,4 +1,4 @@
-package com.insa.chat.core;
+package stream.core;
 
 import java.io.Serializable;
 
@@ -13,12 +13,21 @@ public class GlobalMessage implements Serializable {
      */
     private final String data;
 
+    private final String pseudo;
+
     /**
      * Create a new global message to send over network
      * @param type message type
      * @param data message data
      */
     public GlobalMessage(String type, String data) {
+        this.type = type;
+        this.data = data;
+        this.pseudo = "";
+    }
+
+    public GlobalMessage(String pseudo, String type, String data) {
+        this.pseudo = pseudo;
         this.type = type;
         this.data = data;
     }
@@ -38,5 +47,13 @@ public class GlobalMessage implements Serializable {
     public String getData() {
         return data;
     }
-    
+
+    /**
+     * Get message pseudo
+     * @return message pseudo
+     */
+    public String getPseudo() {
+        return pseudo;
+    }
+
 }

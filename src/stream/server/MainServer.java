@@ -1,6 +1,6 @@
-package com.insa.chat.server;
+package stream.server;
 
-import com.insa.chat.core.GlobalMessage;
+import stream.core.GlobalMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -67,7 +67,7 @@ public class MainServer {
 
         for(ClientData client : clients) {
             // Check if the client is not the one which should be ignored
-            if (client.getSocket() != socket) {
+            if (client.getSocket() != socket && client.getPseudo() != null) {
                 try {
                     client.getOutputStream().writeObject(message); // Send the message
                 } catch (IOException e) {
