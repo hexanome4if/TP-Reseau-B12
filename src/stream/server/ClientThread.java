@@ -65,7 +65,6 @@ public class ClientThread extends Thread {
             }
             case "disconnect": {
                 disconnect();
-                MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);
                 break;
             }
             case "connect": {
@@ -81,6 +80,7 @@ public class ClientThread extends Thread {
       // TODO tell other people
       stopLoop = true;
       ClientContainer.removeClient(clientSocket);
+      MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);
     }
 
 }
