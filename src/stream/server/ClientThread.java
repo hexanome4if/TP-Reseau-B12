@@ -20,6 +20,9 @@ public class ClientThread extends Thread {
      */
     private boolean stopLoop = false;
 
+    /**
+     * Current client pseudo
+     */
     private String pseudo = "";
 
     /**
@@ -76,8 +79,10 @@ public class ClientThread extends Thread {
         }
     }
 
+    /**
+     * Method to handle client disconnection (stopping thread, remove client from connected clients list, send disconnection message to everyone)
+     */
     private void disconnect() {
-      // TODO tell other people
       stopLoop = true;
       ClientContainer.removeClient(clientSocket);
       MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);

@@ -1,52 +1,65 @@
-/***
- * EchoClient
- * Example of a TCP client
- * Date: 10/01/04
- * Authors:
- */
 package stream.client;
 
 import java.io.*;
 import java.net.*;
 import stream.core.*;
 
-
-
 public class ReceiverThread extends Thread {
 
-  private Socket echoSocket;
-  private boolean run = true;
-  private ObjectInputStream socIn = null;
+    /**
+     * Socket connection to server
+     */
+    private final Socket echoSocket;
+    /**
+     * Infinite loop manager
+     */
+    private boolean run = true;
+    /**
+     * Input stream from server
+     */
+    private ObjectInputStream socIn = null;
 
-  ReceiverThread(Socket s) {
-    this.echoSocket = s;
-  }
+    /**
+     * Create a thread to receive messages from the server
+     * @param s server socket connection
+     */
+    ReceiverThread(Socket s) {
+        this.echoSocket = s;
+    }
 
-  public void run() {
+    @Override
+    public void run() {
         try {
-          socIn = new ObjectInputStream(echoSocket.getInputStream());
-          while (run) {
-            GlobalMessage message = (GlobalMessage) socIn.readObject(); //TODO : afficher la ligne reçu sur l'interface du client
-            handleMessage(message);
-          }
+            socIn = new ObjectInputStream(echoSocket.getInputStream());
+            // Infinite loop to receive messages
+            while (run) {
+                // Get the GlobalMessage
+                GlobalMessage message = (GlobalMessage) socIn.readObject();
+                // Handle the message
+                handleMessage(message);
+            }
         } catch (SocketException se) {
-
+            // Ignore exception
         } catch (Exception e) {
             System.err.println("Error in ReceiverThread:" + e);
             e.printStackTrace();
         }
-  }
+    }
 
-  public void disconnect() throws IOException {
-    run = false;
-    socIn.close();
-  }
+    /**
+     * Method used when the client disconnect from the server to clear stream and stop infinite loop
+     * @throws IOException
+     */
+    public void disconnect() throws IOException {
+        run = false;
+        socIn.close();
+    }
 
-  /**
-   * Handle and treat a new message from the client
-   * @param message the message sent by the client
-   */
-  private void handleMessage(GlobalMessage message) {
+    /**
+    * Handle and treat a new message from the server
+    * @param message the message sent by the server
+    */
+    private void handleMessage(GlobalMessage message) {
       switch (message.getType()) {
           case "message": {
               System.out.println(message.getPseudo() + " : " + message.getData());
@@ -61,6 +74,6 @@ public class ReceiverThread extends Thread {
             break;
           }
       }
-  }
+    }
 
 }

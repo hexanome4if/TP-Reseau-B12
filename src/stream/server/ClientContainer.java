@@ -23,7 +23,7 @@ public class ClientContainer {
      * @param socket client socket
      * @return Created ClientData
      */
-    public static ClientData addClient(Socket socket) {
+    public static synchronized ClientData addClient(Socket socket) {
         ClientData clientData = new ClientData(socket);
         clients.put(getKey(socket), clientData);
         return clientData;
@@ -34,7 +34,7 @@ public class ClientContainer {
      * @param socket client socket
      * @return ClientData if found null if not
      */
-    public static ClientData getClient(Socket socket) {
+    public static synchronized ClientData getClient(Socket socket) {
         String key = getKey(socket);
         if (clients.containsKey(key)) {
             return clients.get(key);
@@ -46,7 +46,7 @@ public class ClientContainer {
      * Remove a client from the list of connected clients
      * @param socket client socket
      */
-    public static void removeClient(Socket socket) {
+    public static synchronized void removeClient(Socket socket) {
         String key = getKey(socket);
         clients.remove(key);
     }
@@ -55,7 +55,7 @@ public class ClientContainer {
      * Get every connected clients
      * @return collection of clients
      */
-    public static Collection<ClientData> getClients() {
+    public static synchronized Collection<ClientData> getClients() {
         return clients.values();
     }
 

@@ -13,6 +13,9 @@ public class GlobalMessage implements Serializable {
      */
     private final String data;
 
+    /**
+     * Message client pseudo (can be empty)
+     */
     private final String pseudo;
 
     /**
