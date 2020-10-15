@@ -50,7 +50,11 @@ public class ClientThread extends Thread {
             }
 
         } catch (EOFException ex) {
-          disconnect();
+          try {
+            disconnect();
+          } catch (IOException e) {
+              Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+          }
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,7 +64,7 @@ public class ClientThread extends Thread {
      * Handle and treat a new message from the client
      * @param message the message sent by the client
      */
-    private void handleMessage(GlobalMessage message) {
+    private void handleMessage(GlobalMessage message) throws IOException {
         switch (message.getType()) {
             case "message": {
                 MainServer.broadcastMessage(new GlobalMessage(pseudo,"message",message.getData()), clientSocket);
@@ -82,7 +86,7 @@ public class ClientThread extends Thread {
     /**
      * Method to handle client disconnection (stopping thread, remove client from connected clients list, send disconnection message to everyone)
      */
-    private void disconnect() {
+    private void disconnect() throws IOException {
       stopLoop = true;
       ClientContainer.removeClient(clientSocket);
       MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);
