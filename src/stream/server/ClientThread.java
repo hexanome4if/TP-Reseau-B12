@@ -67,7 +67,9 @@ public class ClientThread extends Thread {
     private void handleMessage(GlobalMessage message) throws IOException {
         switch (message.getType()) {
             case "message": {
-                MainServer.broadcastMessage(new GlobalMessage(pseudo,"message",message.getData()), clientSocket);
+                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message",message.getData());
+                computedMessage.setDate();
+                MainServer.broadcastMessage(computedMessage, clientSocket);
                 break;
             }
             case "disconnect": {
@@ -77,6 +79,7 @@ public class ClientThread extends Thread {
             case "connect": {
               ClientContainer.getClient(clientSocket).setPseudo(message.getPseudo());
               pseudo = message.getPseudo();
+              message.setDate();
               MainServer.broadcastMessage(message, clientSocket);
               break;
             }
@@ -89,7 +92,9 @@ public class ClientThread extends Thread {
     private void disconnect() throws IOException {
       stopLoop = true;
       ClientContainer.removeClient(clientSocket);
-      MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);
+      GlobalMessage computedMessage = new GlobalMessage(pseudo,"disconnect",null);
+      computedMessage.setDate();
+      MainServer.broadcastMessage(computedMessage, clientSocket);
     }
 
 }

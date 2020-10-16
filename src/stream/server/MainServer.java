@@ -11,15 +11,16 @@ import java.util.*;
  */
 public class MainServer {
 
-    private static List<GlobalMessage> history = new ArrayList<>();
+    private static final List<GlobalMessage> history = new ArrayList<>();
     private static ObjectOutputStream oos = null;
     private static FileOutputStream fos = null;
     private static ObjectInputStream ois = null;
     private static FileInputStream fis = null;
-    private static String nomFichierSerialization = "history.ser";
+    private static final String nomFichierSerialization = "history.ser";
 
     /**
      * Start a TCP server on the port specified as the first CLI argument
+     *
      * @param args CLI arguments
      */
     public static void main(String[] args) throws Exception {
@@ -33,20 +34,20 @@ public class MainServer {
 
         //On lit l'historique des messages
         try {
-          fis = new FileInputStream(nomFichierSerialization);
-          ois = new ObjectInputStream(fis);
+            fis = new FileInputStream(nomFichierSerialization);
+            ois = new ObjectInputStream(fis);
 
-          while(true) {
-              try {
-                history.add((GlobalMessage) ois.readObject());
-              } catch(EOFException ex) {
-                break;
-              }
+            while (true) {
+                try {
+                    history.add((GlobalMessage) ois.readObject());
+                } catch (EOFException ex) {
+                    break;
+                }
 
-          }
+            }
 
-        } catch(FileNotFoundException e) {
-          //On est arrivé à la fin du fichier, on passe à la suite
+        } catch (FileNotFoundException e) {
+            //On est arrivé à la fin du fichier, on passe à la suite
         }
 
 
@@ -56,6 +57,7 @@ public class MainServer {
 
     /**
      * Start a TCP server on the given port
+     *
      * @param port the port the server should listen to
      */
     private static void startServer(int port) throws IOException {
@@ -63,8 +65,8 @@ public class MainServer {
         fos = new FileOutputStream(nomFichierSerialization);
         oos = new ObjectOutputStream(fos);
 
-        for(GlobalMessage gm : history) {
-          oos.writeObject(gm); //on réécrit les andiens messages
+        for (GlobalMessage gm : history) {
+            oos.writeObject(gm); //on réécrit les anciens messages
         }
 
         ServerSocket listenSocket;
@@ -90,8 +92,9 @@ public class MainServer {
 
     /**
      * Broadcast a message to every connected client except the one identified by socket
+     *
      * @param message message to send
-     * @param socket client socket to ignore during broadcast
+     * @param socket  client socket to ignore during broadcast
      */
     public static synchronized void broadcastMessage(GlobalMessage message, Socket socket) throws IOException {
 
@@ -99,27 +102,26 @@ public class MainServer {
         Collection<ClientData> clients = ClientContainer.getClients();
 
 
-        if(clients.size() <= 1 && !message.getPseudo().equals("")) //Si c'est le premier client connecté ou le dernier à se déconnecter
+        /*if(clients.size() <= 1 && !message.getPseudo().equals("")) //Si c'est le premier client connecté ou le dernier à se déconnecter
         {
           if (message.getType().equals("connect")) {
-            GlobalMessage gm = new GlobalMessage(message.getPseudo(),"message","join the chat");
-            history.add(gm);
-            oos.writeObject(gm);
+            history.add(message);
+            oos.writeObject(message);
             oos.flush();
           } else if (message.getType().equals("disconnect") && clients.size() == 0) {
-            GlobalMessage gm = new GlobalMessage(message.getPseudo(),"message","left the chat");
-            history.add(gm);
-            oos.writeObject(gm);
+            history.add(message);
+            oos.writeObject(message);
             oos.flush();
           }
-        }
+        }*/
 
-        for(ClientData client : clients) {
+        for (ClientData client : clients) {
             // Check if the client is not the one which should be ignored
             if (client.getSocket() != socket && client.getPseudo() != null) {
                 try {
                     client.getOutputStream().writeObject(message); // Send the message
-                    switch (message.getType()) {
+
+                    /*switch (message.getType()) {
                         case "message": {
                             GlobalMessage gm = new GlobalMessage(message.getPseudo(),"message",message.getData());
                             history.add(gm);
@@ -138,28 +140,30 @@ public class MainServer {
                             oos.writeObject(gm);
                             break;
                         }
-                    }
-                    oos.flush();
+                    }*/
                 } catch (IOException e) {
                     e.printStackTrace();
-                    oos.flush();
-                    oos.close();
                 }
             }
+
             if (client.getSocket() == socket && client.getPseudo() != null) // On envoie l'historique au nouvel arrivant
             {
-              if(message.getType().equals("connect"))
-              {
-                for(GlobalMessage gm : history)
-                {
-                  try {
-                    client.getOutputStream().writeObject(gm);
-                  } catch (IOException e) {
-                      e.printStackTrace();
-                  }
+                if (message.getType().equals("connect")) {
+                    for (GlobalMessage gm : history) {
+                        try {
+                            client.getOutputStream().writeObject(gm);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-              }
             }
+
         }
+
+        // Add the message in the history
+        history.add(message);
+        oos.writeObject(message);
+        oos.flush();
     }
 }
