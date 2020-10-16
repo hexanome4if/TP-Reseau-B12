@@ -63,6 +63,7 @@ public class ClientThread extends Thread {
     private void handleMessage(GlobalMessage message) {
         switch (message.getType()) {
             case "message": {
+                System.out.println("Message sent: " + message.getData());
                 MainServer.broadcastMessage(new GlobalMessage(pseudo,"message",message.getData()), clientSocket);
                 break;
             }

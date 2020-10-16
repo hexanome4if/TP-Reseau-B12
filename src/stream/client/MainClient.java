@@ -1,11 +1,52 @@
 package stream.client;
 
+import stream.client.view.PseudoFrame;
+import stream.core.GlobalMessage;
+
 import java.io.*;
 import java.net.*;
-
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.Semaphore;
 
 
 public class MainClient {
+
+    private static ReceiverThread receiverThread;
+    private static SenderThread senderThread;
+    private static Socket echoSocket;
+
+    /**
+     *
+     */
+    private static Queue<GlobalMessage> sendQueue = new LinkedList<>();
+    private static Semaphore sendQueueLock = new Semaphore(1);
+
+
+    public static void send(GlobalMessage message) {
+        try {
+            sendQueueLock.acquire();
+            sendQueue.add(message);
+            sendQueueLock.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static GlobalMessage getNextMessageToSend() {
+        try {
+            sendQueueLock.acquire();
+            if (sendQueue.size() > 0) {
+                GlobalMessage message = sendQueue.remove();
+                sendQueueLock.release();
+                return message;
+            }
+            sendQueueLock.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Start a chat client which will connect to a TCP server
@@ -24,20 +65,19 @@ public class MainClient {
         Integer port = Integer.parseInt(args[1]);
 
         // Create the connection to the server
-        Socket echoSocket = connectToServer(host, port);
+        echoSocket = connectToServer(host, port);
 
         // Start receiver thread
-        ReceiverThread rt = new ReceiverThread(echoSocket);
-        rt.start();
+        receiverThread = new ReceiverThread(echoSocket);
+        receiverThread.start();
 
         // Start sender loop
-        SenderManager st = new SenderManager(echoSocket);
-        st.run();
+        senderThread = new SenderThread(echoSocket);
+        senderThread.start();
 
-        // Disconnect when client asks
-        rt.disconnect();
-        st.disconnect();
-        disconnect(echoSocket);
+        // Show pseudo frame
+        new PseudoFrame().show();
+
     }
 
     /**
@@ -62,10 +102,15 @@ public class MainClient {
 
     /**
      * Disconnect client from server
-     * @param echoSocket Socket connection to the server
      * @throws IOException
      */
-    public static void disconnect(Socket echoSocket) throws IOException {
-        echoSocket.close();
+    public static void disconnect() {
+        try {
+            senderThread.disconnect();
+            receiverThread.disconnect();
+            echoSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
