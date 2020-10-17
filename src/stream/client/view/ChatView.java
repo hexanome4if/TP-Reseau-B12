@@ -7,8 +7,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class ChatView {
@@ -229,6 +231,24 @@ public class ChatView {
         sendMessageBTN.addActionListener(actionEvent -> {
             chatController.sendMessage(messageIF.getText());
             messageIF.setText("");
+        });
+
+        // Send message when press enter
+        sendMessageBTN.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "DoClick");
+        sendMessageBTN.getActionMap().put("DoClick", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                chatController.sendMessage(messageIF.getText());
+                messageIF.setText("");
+            }
+        });
+        messageIF.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "DoClick");
+        messageIF.getActionMap().put("DoClick", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                chatController.sendMessage(messageIF.getText());
+                messageIF.setText("");
+            }
         });
 
         // Useful to scroll down when we add a new message

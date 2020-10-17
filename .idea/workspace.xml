@@ -22,19 +22,7 @@
     <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/history.ser" beforeDir="false" afterPath="$PROJECT_DIR$/history.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/MainClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/ReceiverThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/ReceiverThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/SenderThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/SenderThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/PseudoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/PseudoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatFrame.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatFrame.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/PseudoFrame.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/PseudoFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/PseudoView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/PseudoView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/core/GlobalMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/GlobalMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,25 +113,25 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602943344501" />
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1602943758707">
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1602945091854">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602943758707" />
-    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1602943758705">
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602945091854" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1602945091854">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602943758705" />
-    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1602943758703">
+    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602945091854" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1602945091853">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602943758703" />
-    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1602943758706">
+    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602945091853" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1602945091854">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602943758706" />
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1602941075968">
+    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602945091854" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1602944759480">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602941075968" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602944759480" />
   </component>
 </project>
