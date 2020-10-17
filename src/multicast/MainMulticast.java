@@ -1,9 +1,10 @@
 /***
- * EchoClient
- * Example of a TCP client
- * Date: 10/01/04
- * Authors:
+ * MainMulticast
+ * Multicast UDP client
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
  */
+
 package multicast;
 
 import java.io.*;
@@ -13,35 +14,52 @@ import java.net.*;
 
 public class MainMulticast {
 
+  /**
+  * multicast socket of the client
+  **/
+  private static MulticastSocket multicastSocket = null;
+  /**
+  * adress group of the client
+  **/
+  private static InetAddress groupAddr = null;
+  /**
+  * port group of the client
+  **/
+  private static int groupPort = 9001;
+  /**
+  * IP adress for the multicast
+  **/
+  private static String multicastIPAdress = "228.5.6.7";
 
   /**
   *  main method
-  *  accepts a connection, receives a message from client then sends an echo to the client
+  *  Connection to the multicast group
+  * @throws IOException
   **/
     public static void main(String[] args) throws IOException {
 
-        MulticastSocket multicastSocket = null;
-        InetAddress groupAddr = InetAddress.getByName("228.5.6.7");
-        int groupPort = 9001;
+        groupAddr = InetAddress.getByName(multicastIPAdress);
 
-        multicastSocket = connectToServer(multicastSocket, groupAddr, groupPort);
+        connectToGroup();
 
         ReceiverThread rt = null;
         SenderThread st = null;
 
-        rt = new ReceiverThread(multicastSocket, groupAddr, groupPort);
+        rt = new ReceiverThread(multicastSocket);
         rt.start();
         st = new SenderThread(multicastSocket, groupAddr, groupPort);
         st.run();
 
 
         rt.disconnect();
-        st.disconnect();
-        disconnect(multicastSocket, groupAddr);
+        disconnect();
 
     }
 
-    public static MulticastSocket connectToServer(MulticastSocket multicastSocket, InetAddress groupAddr, int groupPort)  {
+    /**
+    * Connect the client to the group
+    **/
+    public static void connectToGroup()  {
         try {
             // creation socket ==> connexion
             multicastSocket = new MulticastSocket(groupPort);
@@ -50,10 +68,12 @@ public class MainMulticast {
             System.err.println("Error in connection to multicast : " + e);
             System.exit(1);
         }
-        return multicastSocket;
     }
 
-    public static void disconnect(MulticastSocket multicastSocket, InetAddress groupAddr) throws IOException {
+    /**
+    * Disconnect the client to the group
+    **/
+    public static void disconnect() throws IOException {
       multicastSocket.leaveGroup(groupAddr);
     }
 }
