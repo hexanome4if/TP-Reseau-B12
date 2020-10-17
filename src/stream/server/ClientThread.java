@@ -69,11 +69,16 @@ public class ClientThread extends Thread {
      */
     private void handleMessage(GlobalMessage message) throws IOException {
         switch (message.getType()) {
-            case "message": {
-                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message",message.getData());
+            case "message-txt": {
+                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message-txt",message.getData());
                 computedMessage.setDate();
                 MainServer.broadcastMessage(computedMessage, clientSocket);
                 break;
+            }
+            case "message-file": {
+                GlobalMessage computedMessage = new GlobalMessage(pseudo, "message-file", message.getData());
+                computedMessage.setDate();
+                MainServer.broadcastMessage(computedMessage, clientSocket);
             }
             case "disconnect": {
                 disconnect();

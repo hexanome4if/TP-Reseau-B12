@@ -1,19 +1,30 @@
 package stream.client.view;
 
 import stream.client.controller.ChatController;
+import stream.core.FileMessage;
 import stream.core.GlobalMessage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class ChatView {
+
+    /**
+     * File extension considered as images
+     */
+    private final java.util.List<String> imagesExtensions = Arrays.asList("jpg", "jpeg", "png");
 
     /**
      * Default font to use
@@ -49,6 +60,10 @@ public class ChatView {
      * Send button
      */
     private JButton sendMessageBTN;
+    /**
+     * Send file message button
+     */
+    private JButton sendFileBTN;
     /**
      * Disconnect button
      */
@@ -209,8 +224,15 @@ public class ChatView {
         messageIF.setPreferredSize(new Dimension(1000, 30));
         bottomBar.add(messageIF, constraints);
 
-        constraints.gridx = 1;
         constraints.weightx = 2;
+        constraints.gridx = 1;
+        sendFileBTN = new JButton("Send file");
+        sendFileBTN.setForeground(new Color(0, 0, 0));
+        sendFileBTN.setBackground(new Color(200, 200, 200));
+        sendFileBTN.setFont(font);
+        bottomBar.add(sendFileBTN, constraints);
+
+        constraints.gridx = 2;
         sendMessageBTN = new JButton("Send");
         sendMessageBTN.setForeground(new Color(0, 0, 0));
         sendMessageBTN.setBackground(new Color(200, 200, 200));
@@ -251,6 +273,23 @@ public class ChatView {
             }
         });
 
+        // Send file messages
+        sendFileBTN.addActionListener(actionEvent -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            chooser.setMultiSelectionEnabled(false);
+            if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                System.out.println("Ok");
+                File selectedFile = chooser.getSelectedFile();
+                try {
+                    chatController.sendFile(selectedFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
         // Useful to scroll down when we add a new message
         chatListPanel.addComponentListener(new ComponentListener() {
             @Override
@@ -276,7 +315,7 @@ public class ChatView {
         messagePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         switch (message.getType()) {
-            case "message": {
+            case "message-file": {
                 messagePanel.setLayout(new GridBagLayout());
 
                 JPanel topContainer = new JPanel();
@@ -300,7 +339,71 @@ public class ChatView {
 
                 topContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-                JLabel messageLabel = new JLabel(message.getData());
+                FileMessage fileMessage = (FileMessage)message.getData();
+                System.out.println(fileMessage.getFileName());
+                String[] fileNameSplit = fileMessage.getFileName().split("\\.");
+                String fileExt = fileNameSplit[fileNameSplit.length - 1];
+                JLabel messageLabel;
+                if (imagesExtensions.contains(fileExt)) {
+                    try {
+                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(fileMessage.getFileBytes()));
+                        Image finalImage;
+                        if (image.getWidth() > image.getHeight()) {
+                            finalImage = image.getScaledInstance(400, (image.getHeight() * 400) / image.getWidth(), 0);
+                        } else {
+                            finalImage = image.getScaledInstance((image.getWidth() * 300) / image.getHeight(), 300, 0);
+                        }
+                        ImageIcon imageIcon = new ImageIcon(finalImage);
+                        messageLabel = new JLabel(imageIcon);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        messageLabel = new JLabel("Cannot load image");
+                    }
+                } else {
+                    messageLabel = new JLabel("File");
+                }
+                messageLabel.setForeground(new Color(25, 25, 25));
+                messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+                GridBagConstraints gridBagConstraints = new GridBagConstraints();
+                gridBagConstraints.weighty = 1;
+                gridBagConstraints.weightx = 1;
+                gridBagConstraints.gridy = 0;
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+
+                messagePanel.add(topContainer, gridBagConstraints);
+                gridBagConstraints.gridy = 1;
+                gridBagConstraints.anchor = GridBagConstraints.EAST;
+                messagePanel.add(messageLabel, gridBagConstraints);
+                break;
+            }
+            case "message-txt": {
+                messagePanel.setLayout(new GridBagLayout());
+
+                JPanel topContainer = new JPanel();
+                topContainer.setLayout(new GridBagLayout());
+                topContainer.setOpaque(false);
+
+                JLabel pseudoLabel = new JLabel(message.getPseudo());
+                pseudoLabel.setForeground(new Color(50, 50, 50));
+                pseudoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                JLabel dateLabel = new JLabel(message.getDate(), SwingConstants.RIGHT);
+                dateLabel.setForeground(new Color(50, 50, 50));
+                dateLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                GridBagConstraints constraints = new GridBagConstraints();
+                constraints.fill = GridBagConstraints.HORIZONTAL;
+                constraints.weightx = 1;
+                constraints.weighty = 1;
+                topContainer.add(pseudoLabel, constraints);
+                topContainer.add(dateLabel, constraints);
+
+                topContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+                JLabel messageLabel = new JLabel((String)message.getData());
                 messageLabel.setForeground(new Color(25, 25, 25));
                 messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
                 messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);

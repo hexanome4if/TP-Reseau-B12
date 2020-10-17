@@ -13,7 +13,7 @@ public class GlobalMessage implements Serializable {
     /**
      * Message data corresponding to the message type
      */
-    private final String data;
+    private final Object data;
 
     /**
      * Message client pseudo (can be empty)
@@ -30,7 +30,7 @@ public class GlobalMessage implements Serializable {
      * @param type message type
      * @param data message data
      */
-    public GlobalMessage(String type, String data) {
+    public GlobalMessage(String type, Object data) {
         this.type = type;
         this.data = data;
         this.pseudo = "";
@@ -43,7 +43,7 @@ public class GlobalMessage implements Serializable {
      * @param type message type
      * @param data message data
      */
-    public GlobalMessage(String pseudo, String type, String data) {
+    public GlobalMessage(String pseudo, String type, Object data) {
         this.pseudo = pseudo;
         this.type = type;
         this.data = data;
@@ -61,7 +61,7 @@ public class GlobalMessage implements Serializable {
      * Get message data
      * @return message data
      */
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
