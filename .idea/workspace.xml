@@ -20,7 +20,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/green-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/red-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/history.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stream/server/AppendingObjectOutputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/TP-Reseau-B12.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TP-Reseau-B12.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Reseau-B12.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Reseau-B12.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/client.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/HandleGet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/HandleGet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/WebServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/WebServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/multicast/MainMulticast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/multicast/MainMulticast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/multicast/ReceiverThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/multicast/ReceiverThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/multicast/SenderThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/multicast/SenderThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/MainClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/ReceiverThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/ReceiverThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/SenderThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/SenderThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/PseudoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/PseudoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/PseudoFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/PseudoFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/PseudoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/PseudoFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/core/GlobalMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/GlobalMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/ClientContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/ClientData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/MainServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +73,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1iq1ZrdMxFWGkf11Yk4VR4zKJbq" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TP-HTTP-Code" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager" selected="Application.MainClient">
     <configuration name="MainClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
@@ -83,19 +105,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WebServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="httpserver.WebServer" />
-      <module name="TP-Reseau-B12" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="httpserver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -107,74 +116,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Start client" type="ShConfigurationType" singleton="false">
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/client.sh" />
-      <option name="SCRIPT_OPTIONS" value="localhost 9000" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="/usr/bin/fish" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Start remote client" type="ShConfigurationType">
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/client.sh" />
-      <option name="SCRIPT_OPTIONS" value="10.43.6.177 9000" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="/usr/bin/fish" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Start server" type="ShConfigurationType">
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/server.sh" />
-      <option name="SCRIPT_OPTIONS" value="9000" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="/usr/bin/fish" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Application.WebServer" />
-      <item itemvalue="Application.MainClient" />
       <item itemvalue="Application.MainServer" />
-      <item itemvalue="Shell Script.Start client" />
-      <item itemvalue="Shell Script.Start remote client" />
-      <item itemvalue="Shell Script.Start server" />
+      <item itemvalue="Application.MainClient" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainClient" />
         <item itemvalue="Application.MainServer" />
-        <item itemvalue="Application.WebServer" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="" />
-      <created>1602620374096</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1602620374096</updated>
-      <workItem from="1602620378958" duration="246000" />
-      <workItem from="1602655780523" duration="6289000" />
-      <workItem from="1602664419695" duration="3718000" />
-      <workItem from="1602763926957" duration="11636000" />
-      <workItem from="1602836433581" duration="4063000" />
-      <workItem from="1602938103210" duration="2180000" />
-    </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -189,45 +143,29 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="418" y="211" width="1084" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602773844357">
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602943344501">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="418" y="211" width="1084" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602773844357" />
-    <state x="768" y="261" width="374" height="583" key="#com.intellij.ide.util.MemberChooser" timestamp="1602767656901">
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602943344501" />
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1602943310532">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="768" y="261" width="374" height="583" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1602767656901" />
-    <state x="743" y="324" width="424" height="482" key="FileChooserDialogImpl" timestamp="1602663697706">
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602943310532" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1602943310532">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="743" y="324" width="424" height="482" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1602663697706" />
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1602940145146">
+    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602943310532" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1602943310532">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602940145146" />
-    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1602940145145">
+    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602943310532" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1602943310532">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602940145145" />
-    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1602940145144">
+    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602943310532" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1602941075968">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602940145144" />
-    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1602940145145">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602940145145" />
-    <state x="623" y="271" width="664" height="562" key="GuiDesigner.FormSource.Dialog" timestamp="1602773078599">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="623" y="271" width="664" height="562" key="GuiDesigner.FormSource.Dialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602773078599" />
-    <state x="651" y="162" width="618" height="783" key="find.popup" timestamp="1602837578568">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="651" y="162" width="618" height="783" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602837578568" />
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1602938878172">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602938878172" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602941075968" />
   </component>
 </project>

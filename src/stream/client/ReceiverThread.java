@@ -50,7 +50,6 @@ public class ReceiverThread extends Thread {
             while (run) {
                 // Get the GlobalMessage
                 GlobalMessage message = (GlobalMessage) socIn.readObject();
-                System.out.println(message.getData());
                 // Handle the message
                 if (chatController != null) {
                     chatController.receiveMessage(message);
@@ -72,26 +71,4 @@ public class ReceiverThread extends Thread {
         run = false;
         socIn.close();
     }
-
-    /**
-    * Handle and treat a new message from the server
-    * @param message the message sent by the server
-    */
-    private void handleMessage(GlobalMessage message) {
-      switch (message.getType()) {
-          case "message": {
-              System.out.println(message.getPseudo() + " : " + message.getData());
-              break;
-          }
-          case "disconnect": {
-              System.out.println(message.getPseudo() + " : left the chat");
-              break;
-          }
-          case "connect": {
-            System.out.println(message.getPseudo() + " : join the chat");
-            break;
-          }
-      }
-    }
-
 }

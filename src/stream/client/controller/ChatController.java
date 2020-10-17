@@ -4,30 +4,32 @@ import stream.client.MainClient;
 import stream.client.ReceiverThread;
 import stream.client.SenderThread;
 import stream.client.view.ChatFrame;
+import stream.client.view.ChatView;
 import stream.core.GlobalMessage;
 
 public class ChatController {
-    private final ChatFrame chatFrame;
+    private final ChatView chatView;
 
-    public ChatController(ChatFrame chatFrame) {
-        this.chatFrame = chatFrame;
+    public ChatController(ChatView chatView) {
+        this.chatView = chatView;
         ReceiverThread.getInstance().registerChatController(this);
     }
 
     public void disconnect() {
         MainClient.send(new GlobalMessage("disconnect", null));
         MainClient.disconnect();
-        chatFrame.close();
+        chatView.close();
         System.exit(0);
     }
 
     public void sendMessage(String message) {
         MainClient.send(new GlobalMessage("message", message));
-        chatFrame.onReceiveMessage(new GlobalMessage("Me", "message", message));
+        GlobalMessage globalMessage = new GlobalMessage("Me", "message", message);
+        globalMessage.setDate();
+        chatView.onReceiveMessage(globalMessage);
     }
 
     public void receiveMessage(GlobalMessage message) {
-        System.out.println("Message received in controller");
-        chatFrame.onReceiveMessage(message);
+        chatView.onReceiveMessage(message);
     }
 }

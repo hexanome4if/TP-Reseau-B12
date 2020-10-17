@@ -7,34 +7,45 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ChatFrame {
-    private JPanel panel1;
-    private JButton sendButton;
-    private JTextField messageTextField;
-    private JButton button1;
-    private JScrollPane messageList;
+public class ChatView {
+
+    private final Font font = new Font("Arial", Font.PLAIN, 14);
+    private final java.util.List<GlobalMessage> messages = new ArrayList<>();
+
+    private final ChatController chatController;
+
     private JFrame frame;
+    private JScrollPane chatList;
     private JPanel chatListPanel;
     private GridBagConstraints gridBagConstraints;
+    private JTextField messageIF;
+    private JButton sendMessageBTN;
 
-    private ChatController chatController;
+    private JButton disconnectBTN;
 
-    private final java.util.List<GlobalMessage> messages;
+    public ChatView() {
+        chatController = new ChatController(this);
+    }
 
-    public ChatFrame() {
+    public void show() {
+        frame = new JFrame("INSAChat - Chat");
 
-        messages = new ArrayList<>();
-        // chatController = new ChatController(this);
-        sendButton.addActionListener(actionEvent -> {
-            chatController.sendMessage(messageTextField.getText());
-            messageTextField.setText("");
-        });
-        button1.addActionListener(actionEvent -> chatController.disconnect());
+        frame.setContentPane(renderView());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1200, 700);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setBackground(new Color(255, 255, 255));
+        frame.setVisible(true);
+
+        registerEvents();
+
     }
 
     public void close() {
@@ -45,28 +56,68 @@ public class ChatFrame {
     public void onReceiveMessage(GlobalMessage message) {
         SwingUtilities.invokeLater(() -> {
             messages.add(message);
-            try {
-                renderMessage(message);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+
+            renderMessage(message);
         });
     }
 
-    public void show () {
-        frame = new JFrame("INSAChat - Chat");
+    private JPanel renderView() {
+        JPanel view = new JPanel(new GridBagLayout());
+        view.setBackground(new Color(255, 255, 0));
 
-        frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 700);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setBackground(new Color(255, 255, 255));
-        frame.setVisible(true);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
 
+        // Top bar
+        view.add(renderTopBar(), constraints);
+
+        // Chat
+        constraints.gridy = 1;
+        constraints.weighty = 10;
+        view.add(renderChat(), constraints);
+
+        // Bottom bar
+        constraints.gridy = 2;
+        constraints.weighty = 1;
+        view.add(renderBottomBar(), constraints);
+
+        return view;
     }
 
-    private void renderMessageList() {
+    private JPanel renderTopBar() {
+        JPanel topBar = new JPanel();
+        topBar.setLayout(new GridBagLayout());
+        topBar.setBackground(new Color(255, 255, 255));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weighty = 1;
+        constraints.weightx = 1;
+        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.insets = new Insets(0, 20, 0, 20);
+        constraints.anchor = GridBagConstraints.EAST;
+
+        disconnectBTN = new JButton("Disconnect");
+        disconnectBTN.setForeground(new Color(0, 0, 0));
+        disconnectBTN.setBackground(new Color(200, 200, 200));
+        disconnectBTN.setFont(font);
+        disconnectBTN.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        disconnectBTN.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+        topBar.add(disconnectBTN, constraints);
+        return topBar;
+    }
+
+    private  JPanel renderChat() {
+        JPanel chat = new JPanel(new GridBagLayout());
+        chat.setBackground(new Color(0, 255, 0));
+
+        chatListPanel = new JPanel();
+        chatListPanel.setBackground(new Color(0, 0, 255));
         chatListPanel.setLayout(new GridBagLayout());
 
         gridBagConstraints = new GridBagConstraints();
@@ -76,18 +127,59 @@ public class ChatFrame {
         gridBagConstraints.anchor = GridBagConstraints.PAGE_END;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+
+        chatList = new JScrollPane(chatListPanel);
+        chat.add(chatList, constraints);
+
+
+        return chat;
     }
 
-    private void createUIComponents() {
-        chatListPanel = new JPanel();
-        renderMessageList();
-        messageList = new JScrollPane(chatListPanel);
+    private JPanel renderBottomBar() {
+        JPanel bottomBar = new JPanel(new GridBagLayout());
+        bottomBar.setBackground(new Color(255, 255, 255));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weighty = 1;
+        constraints.weightx = 10;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+
+        messageIF = new JTextField();
+        messageIF.setForeground(new Color(0, 0, 0));
+        messageIF.setFont(font);
+        messageIF.setPreferredSize(new Dimension(1000, 30));
+        bottomBar.add(messageIF, constraints);
+
+        constraints.gridx = 1;
+        constraints.weightx = 2;
+        sendMessageBTN = new JButton("Send");
+        sendMessageBTN.setForeground(new Color(0, 0, 0));
+        sendMessageBTN.setBackground(new Color(200, 200, 200));
+        sendMessageBTN.setFont(font);
+        bottomBar.add(sendMessageBTN, constraints);
+
+        return bottomBar;
+    }
+
+    private void registerEvents() {
+        disconnectBTN.addActionListener(actionEvent -> chatController.disconnect());
+
+        sendMessageBTN.addActionListener(actionEvent -> {
+            chatController.sendMessage(messageIF.getText());
+            messageIF.setText("");
+        });
 
         // Useful to scroll down when we add a new message
         chatListPanel.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
-                messageList.getVerticalScrollBar().setValue(messageList.getVerticalScrollBar().getMaximum());
+                chatList.getVerticalScrollBar().setValue(chatList.getVerticalScrollBar().getMaximum());
             }
             @Override
             public void componentMoved(ComponentEvent e) {}
@@ -98,7 +190,7 @@ public class ChatFrame {
         });
     }
 
-    private void renderMessage(GlobalMessage message) throws IOException {
+    private void renderMessage(GlobalMessage message) {
         JPanel messagePanel = new JPanel();
         messagePanel.setBackground(new Color(255, 255, 255));
         messagePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -176,7 +268,6 @@ public class ChatFrame {
                 break;
             }
             case "disconnect": {
-                System.out.println("Disconnect message");
                 messagePanel.setLayout(new GridBagLayout());
                 try {
                     Image image = ImageIO.read(new File("assets/red-arrow.png"));

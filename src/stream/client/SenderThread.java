@@ -2,11 +2,8 @@ package stream.client;
 
 import java.io.*;
 import java.net.*;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import stream.core.*;
-import sun.applet.Main;
 
 public class SenderThread extends Thread {
 
@@ -33,14 +30,13 @@ public class SenderThread extends Thread {
      * @param s socket connection to the server
      */
     SenderThread(Socket s) {
-      this.echoSocket = s;
+        this.echoSocket = s;
     }
 
     /**
      * Start an infinite loop to send messages to the server
      */
     public void run() {
-        System.out.println("Start sender");
         try {
             stdIn = new BufferedReader(new InputStreamReader(System.in));
             socOut = new ObjectOutputStream(echoSocket.getOutputStream());
@@ -49,7 +45,6 @@ public class SenderThread extends Thread {
             while (run) {
                 GlobalMessage message = MainClient.getNextMessageToSend();
                 if (message != null) {
-                    System.out.println("Sendign message: " + message.getData());
                     socOut.writeObject(message);
                 }
             }
@@ -60,7 +55,6 @@ public class SenderThread extends Thread {
             System.err.println("Error in SenderThread:" + e);
             e.printStackTrace();
         }
-        System.out.println("End send");
     }
 
     /**

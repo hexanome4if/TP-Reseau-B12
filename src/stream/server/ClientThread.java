@@ -50,7 +50,11 @@ public class ClientThread extends Thread {
             }
 
         } catch (EOFException ex) {
-          disconnect();
+          try {
+            disconnect();
+          } catch (IOException e) {
+              Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+          }
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,11 +64,12 @@ public class ClientThread extends Thread {
      * Handle and treat a new message from the client
      * @param message the message sent by the client
      */
-    private void handleMessage(GlobalMessage message) {
+    private void handleMessage(GlobalMessage message) throws IOException {
         switch (message.getType()) {
             case "message": {
-                System.out.println("Message sent: " + message.getData());
-                MainServer.broadcastMessage(new GlobalMessage(pseudo,"message",message.getData()), clientSocket);
+                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message",message.getData());
+                computedMessage.setDate();
+                MainServer.broadcastMessage(computedMessage, clientSocket);
                 break;
             }
             case "disconnect": {
@@ -74,6 +79,7 @@ public class ClientThread extends Thread {
             case "connect": {
               ClientContainer.getClient(clientSocket).setPseudo(message.getPseudo());
               pseudo = message.getPseudo();
+              message.setDate();
               MainServer.broadcastMessage(message, clientSocket);
               break;
             }
@@ -83,10 +89,12 @@ public class ClientThread extends Thread {
     /**
      * Method to handle client disconnection (stopping thread, remove client from connected clients list, send disconnection message to everyone)
      */
-    private void disconnect() {
+    private void disconnect() throws IOException {
       stopLoop = true;
       ClientContainer.removeClient(clientSocket);
-      MainServer.broadcastMessage(new GlobalMessage(pseudo,"disconnect",null), clientSocket);
+      GlobalMessage computedMessage = new GlobalMessage(pseudo,"disconnect",null);
+      computedMessage.setDate();
+      MainServer.broadcastMessage(computedMessage, clientSocket);
     }
 
 }

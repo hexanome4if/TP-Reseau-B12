@@ -1,6 +1,8 @@
 package stream.core;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GlobalMessage implements Serializable {
     /**
@@ -19,6 +21,11 @@ public class GlobalMessage implements Serializable {
     private final String pseudo;
 
     /**
+     * Message date
+     */
+    private String date;
+
+    /**
      * Create a new global message to send over network
      * @param type message type
      * @param data message data
@@ -27,6 +34,7 @@ public class GlobalMessage implements Serializable {
         this.type = type;
         this.data = data;
         this.pseudo = "";
+        this.date = "";
     }
 
     public GlobalMessage(String pseudo, String type, String data) {
@@ -59,4 +67,15 @@ public class GlobalMessage implements Serializable {
         return pseudo;
     }
 
+    /**
+     * Get message date
+     * @return message date
+     */
+    public String getDate() { return date; }
+
+    public void setDate() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        this.date = format.format(date);
+    }
 }

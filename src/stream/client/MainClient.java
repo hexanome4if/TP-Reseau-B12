@@ -17,11 +17,8 @@ public class MainClient {
     private static SenderThread senderThread;
     private static Socket echoSocket;
 
-    /**
-     *
-     */
-    private static Queue<GlobalMessage> sendQueue = new LinkedList<>();
-    private static Semaphore sendQueueLock = new Semaphore(1);
+    private static final Queue<GlobalMessage> sendQueue = new LinkedList<>();
+    private static final Semaphore sendQueueLock = new Semaphore(1);
 
 
     public static void send(GlobalMessage message) {
@@ -52,9 +49,8 @@ public class MainClient {
     /**
      * Start a chat client which will connect to a TCP server
      * @param args CLI arguments
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Check CLI arguments
         if (args.length != 2) {
             System.out.println("Usage: java main <EchoServer host> <EchoServer port>");
