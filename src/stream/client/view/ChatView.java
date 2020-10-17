@@ -10,29 +10,58 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ChatView {
 
+    /**
+     * Default font to use
+     */
     private final Font font = new Font("Arial", Font.PLAIN, 14);
-    private final java.util.List<GlobalMessage> messages = new ArrayList<>();
 
+    /**
+     * Reference to the chat controller to handle user actions
+     */
     private final ChatController chatController;
 
+    /**
+     * Actual window
+     */
     private JFrame frame;
+    /**
+     * List component containing the panel which contains the messages
+     */
     private JScrollPane chatList;
+    /**
+     * Panel component containing the messages
+     */
     private JPanel chatListPanel;
+    /**
+     * Constraints for the layout for the new messages
+     */
     private GridBagConstraints gridBagConstraints;
+    /**
+     * Input field for user messages
+     */
     private JTextField messageIF;
+    /**
+     * Send button
+     */
     private JButton sendMessageBTN;
-
+    /**
+     * Disconnect button
+     */
     private JButton disconnectBTN;
 
+    /**
+     * Create a new chat view but does not show it
+     */
     public ChatView() {
         chatController = new ChatController(this);
     }
 
+    /**
+     * Render the view
+     */
     public void show() {
         frame = new JFrame("INSAChat - Chat");
 
@@ -48,19 +77,29 @@ public class ChatView {
 
     }
 
+    /**
+     * Close the window
+     */
     public void close() {
         frame.setVisible(false);
         frame.dispose();
     }
 
+    /**
+     * Event to call when a new message is received to show it on the view
+     * @param message the message received
+     */
     public void onReceiveMessage(GlobalMessage message) {
+        // Important to be thread safe
         SwingUtilities.invokeLater(() -> {
-            messages.add(message);
-
             renderMessage(message);
         });
     }
 
+    /**
+     * Render the view with the different panels
+     * @return the panel representing the entire view
+     */
     private JPanel renderView() {
         JPanel view = new JPanel(new GridBagLayout());
         view.setBackground(new Color(255, 255, 0));
@@ -88,6 +127,10 @@ public class ChatView {
         return view;
     }
 
+    /**
+     * Render the top bar panel
+     * @return the top bar panel component
+     */
     private JPanel renderTopBar() {
         JPanel topBar = new JPanel();
         topBar.setLayout(new GridBagLayout());
@@ -112,12 +155,16 @@ public class ChatView {
         return topBar;
     }
 
+    /**
+     * Render the chat panel
+     * @return the chat panel component
+     */
     private  JPanel renderChat() {
         JPanel chat = new JPanel(new GridBagLayout());
-        chat.setBackground(new Color(0, 255, 0));
+        chat.setBackground(new Color(255, 255, 255));
 
         chatListPanel = new JPanel();
-        chatListPanel.setBackground(new Color(0, 0, 255));
+        chatListPanel.setOpaque(false);
         chatListPanel.setLayout(new GridBagLayout());
 
         gridBagConstraints = new GridBagConstraints();
@@ -140,6 +187,10 @@ public class ChatView {
         return chat;
     }
 
+    /**
+     * Render the bottom bar panel
+     * @return the bottom bar panel component
+     */
     private JPanel renderBottomBar() {
         JPanel bottomBar = new JPanel(new GridBagLayout());
         bottomBar.setBackground(new Color(255, 255, 255));
@@ -167,9 +218,14 @@ public class ChatView {
         return bottomBar;
     }
 
+    /**
+     * Register user events on the view
+     */
     private void registerEvents() {
+        // Disconnect when user asks
         disconnectBTN.addActionListener(actionEvent -> chatController.disconnect());
 
+        // Send message on click on the send button
         sendMessageBTN.addActionListener(actionEvent -> {
             chatController.sendMessage(messageIF.getText());
             messageIF.setText("");
@@ -190,6 +246,10 @@ public class ChatView {
         });
     }
 
+    /**
+     * Render a message received
+     * @param message the message to render
+     */
     private void renderMessage(GlobalMessage message) {
         JPanel messagePanel = new JPanel();
         messagePanel.setBackground(new Color(255, 255, 255));

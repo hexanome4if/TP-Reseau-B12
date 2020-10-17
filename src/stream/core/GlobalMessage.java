@@ -37,6 +37,12 @@ public class GlobalMessage implements Serializable {
         this.date = "";
     }
 
+    /**
+     * Create a new global message with the user pseudo to send over network
+     * @param pseudo user pseudo
+     * @param type message type
+     * @param data message data
+     */
     public GlobalMessage(String pseudo, String type, String data) {
         this.pseudo = pseudo;
         this.type = type;
@@ -73,6 +79,9 @@ public class GlobalMessage implements Serializable {
      */
     public String getDate() { return date; }
 
+    /**
+     * Set the message date in a readable format
+     */
     public void setDate() {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");

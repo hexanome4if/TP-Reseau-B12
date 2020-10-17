@@ -7,21 +7,42 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 
 public class PseudoView {
+    /**
+     * Pseudo controller to handle user actions
+     */
     private final PseudoController pseudoController;
 
+    /**
+     * Input field for user pseudo
+     */
     private JTextField pseudoIF;
+    /**
+     * Button to connect to the server
+     */
     private JButton setPseudoBTN;
+    /**
+     * The actual window
+     */
     private JFrame frame;
 
+    /**
+     * Create a view to choose a pseudo but does not render it
+     */
     public PseudoView() {
         pseudoController = new PseudoController(this);
     }
 
+    /**
+     * Close the window
+     */
     public void close() {
         frame.setVisible(false);
         frame.dispose();
     }
 
+    /**
+     * Render the view
+     */
     public void show() {
         frame = new JFrame("INSAChat - Pseudo selection");
 
@@ -36,6 +57,10 @@ public class PseudoView {
         registerEvents();
     }
 
+    /**
+     * Render the entire view
+     * @return the panel representing the view
+     */
     private JPanel renderView() {
         JPanel view = new JPanel();
 
@@ -93,6 +118,9 @@ public class PseudoView {
         return view;
     }
 
+    /**
+     * Register user events to handle them
+     */
     private void registerEvents() {
         setPseudoBTN.addActionListener(actionEvent -> {
             setPseudoBTN.setEnabled(false);

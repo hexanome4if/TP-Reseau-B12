@@ -35,6 +35,9 @@ public class ClientThread extends Thread {
         ClientContainer.addClient(clientSocket);
     }
 
+    /**
+     * Receive messages from the clients and handle them
+     */
     @Override
     public void run() {
         try {

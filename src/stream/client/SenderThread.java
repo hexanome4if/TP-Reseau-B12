@@ -36,6 +36,7 @@ public class SenderThread extends Thread {
     /**
      * Start an infinite loop to send messages to the server
      */
+    @Override
     public void run() {
         try {
             stdIn = new BufferedReader(new InputStreamReader(System.in));

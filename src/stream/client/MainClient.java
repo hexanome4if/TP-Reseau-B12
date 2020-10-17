@@ -1,6 +1,5 @@
 package stream.client;
 
-import stream.client.view.PseudoFrame;
 import stream.client.view.PseudoView;
 import stream.core.GlobalMessage;
 
@@ -13,14 +12,33 @@ import java.util.concurrent.Semaphore;
 
 public class MainClient {
 
+    /**
+     * Representation of the thread which receives messages from the server
+     */
     private static ReceiverThread receiverThread;
+    /**
+     * Representation of the thread which send messages to the server
+     */
     private static SenderThread senderThread;
+    /**
+     * Socket connection to the server
+     */
     private static Socket echoSocket;
 
+    /**
+     * Send queue to handle messages to send to the server
+     */
     private static final Queue<GlobalMessage> sendQueue = new LinkedList<>();
+    /**
+     * Lock to ensure there's no conflict while accessing the send queue
+     */
     private static final Semaphore sendQueueLock = new Semaphore(1);
 
 
+    /**
+     * Add a message to send in the send queue
+     * @param message the message to send
+     */
     public static void send(GlobalMessage message) {
         try {
             sendQueueLock.acquire();
@@ -31,6 +49,10 @@ public class MainClient {
         }
     }
 
+    /**
+     * Get the next message to send to the server
+     * @return the next message to send or null if there's none
+     */
     public static GlobalMessage getNextMessageToSend() {
         try {
             sendQueueLock.acquire();

@@ -21,10 +21,20 @@ public class ReceiverThread extends Thread {
      */
     private ObjectInputStream socIn = null;
 
+    /**
+     * Chat controller to send received messages to
+     */
     private ChatController chatController;
 
+    /**
+     * Instance for the singleton
+     */
     private static ReceiverThread instance;
 
+    /**
+     * Get instance (singleton)
+     * @return the current receiver thread instance
+     */
     public static ReceiverThread getInstance() {
         return instance;
     }
@@ -38,10 +48,17 @@ public class ReceiverThread extends Thread {
         instance = this;
     }
 
+    /**
+     * Register the chat controller to send an event when a new message is received
+     * @param chatController the chat controller
+     */
     public void registerChatController(ChatController chatController) {
         this.chatController = chatController;
     }
 
+    /**
+     * Receive messages from the server and send them to the ChatController
+     */
     @Override
     public void run() {
         try {
