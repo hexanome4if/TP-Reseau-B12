@@ -1,23 +1,22 @@
 package stream.client.controller;
 
 import stream.client.MainClient;
-import stream.client.SenderThread;
 import stream.client.view.ChatFrame;
-import stream.client.view.PseudoFrame;
+import stream.client.view.PseudoView;
 import stream.core.GlobalMessage;
 
 public class PseudoController {
 
-    private final PseudoFrame pseudoFrame;
+    private final PseudoView pseudoView;
 
-    public PseudoController(PseudoFrame pseudoFrame) {
-        this.pseudoFrame = pseudoFrame;
+    public PseudoController(PseudoView pseudoView) {
+        this.pseudoView = pseudoView;
     }
 
     public void sendPseudo(String pseudo) {
         MainClient.send(new GlobalMessage(pseudo, "connect", null));
         new ChatFrame().show();
-        pseudoFrame.close();
+        pseudoView.close();
     }
 
 }

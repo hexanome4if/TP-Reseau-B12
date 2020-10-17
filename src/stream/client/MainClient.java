@@ -1,6 +1,7 @@
 package stream.client;
 
 import stream.client.view.PseudoFrame;
+import stream.client.view.PseudoView;
 import stream.core.GlobalMessage;
 
 import java.io.*;
@@ -76,7 +77,7 @@ public class MainClient {
         senderThread.start();
 
         // Show pseudo frame
-        new PseudoFrame().show();
+        new PseudoView().show();
 
     }
 

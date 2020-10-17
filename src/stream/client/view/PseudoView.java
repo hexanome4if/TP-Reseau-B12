@@ -6,16 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
-public class PseudoFrame {
-    private PseudoController pseudoController;
+public class PseudoView {
+    private final PseudoController pseudoController;
 
-    private JPanel panel1;
     private JTextField pseudoIF;
     private JButton setPseudoBTN;
     private JFrame frame;
 
-    public PseudoFrame() {
-        // pseudoController = new PseudoController(this);
+    public PseudoView() {
+        pseudoController = new PseudoController(this);
     }
 
     public void close() {
@@ -43,36 +42,53 @@ public class PseudoFrame {
         // Global panel
         view.setBackground(new Color(255, 255, 255));
         view.setLayout(new BoxLayout(view, BoxLayout.PAGE_AXIS));
+        view.setSize(1200, 700);
+        Box box = new Box(BoxLayout.Y_AXIS);
+        view.add(box);
+        box.add(Box.createVerticalGlue());
+        JPanel mainPanel = new JPanel();
+        mainPanel.setMaximumSize(new Dimension(200, 200));
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new GridBagLayout());
+        box.add(mainPanel);
+        box.add(Box.createVerticalGlue());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weighty = 1;
+        constraints.weightx = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
 
         // Title
-        JLabel titleTxt = new JLabel("INSAChat");
+        JLabel titleTxt = new JLabel("INSAChat", SwingConstants.CENTER);
         titleTxt.setForeground(new Color(0, 0,0));
         titleTxt.setFont(new Font("Arial", Font.PLAIN, 24));
-        view.add(titleTxt);
-
-        // Pseudo panel
-        JPanel pseudoPanel = new JPanel();
-        pseudoPanel.setLayout(new BoxLayout(pseudoPanel, BoxLayout.PAGE_AXIS));
+        mainPanel.add(titleTxt, constraints);
 
         // Pseudo label
-        JLabel pseudoLabel = new JLabel("Pseudo");
+        JLabel pseudoLabel = new JLabel("Pseudo", SwingUtilities.LEFT);
         pseudoLabel.setForeground(new Color(0, 0, 0));
+        pseudoLabel.setBackground(new Color(0, 255, 0));
         pseudoLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        pseudoPanel.add(pseudoLabel);
+        constraints.gridy = 1;
+        mainPanel.add(pseudoLabel, constraints);
 
         // Pseudo Input Field
         pseudoIF = new JTextField();
         pseudoIF.setForeground(new Color(0, 0, 0));
         pseudoIF.setFont(new Font("Arial", Font.PLAIN, 16));
-        pseudoPanel.add(pseudoIF);
+        pseudoIF.setMaximumSize(new Dimension(200, 30));
+        pseudoIF.setMinimumSize(new Dimension(200, 30));
+        constraints.gridy = 2;
+        mainPanel.add(pseudoIF, constraints);
 
-        view.add(pseudoPanel);
 
         // Submit button
         setPseudoBTN = new JButton("Connect");
         setPseudoBTN.setForeground(new Color(0, 0, 0));
         setPseudoBTN.setBackground(new Color(200, 200, 200));
-        view.add(setPseudoBTN);
+        constraints.gridy = 3;
+        mainPanel.add(setPseudoBTN, constraints);
 
         return view;
     }
