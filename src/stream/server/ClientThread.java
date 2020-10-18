@@ -130,7 +130,7 @@ public class ClientThread extends Thread {
                     }
                     case "file": {
                         FileMessageRequest fileMessageRequest = (FileMessageRequest)messageRequest.getData();
-                        GlobalMessage computedMessage = new GlobalMessage("message", new MessageInfo("message", new FileMessageInfo(fileMessageRequest.getFileName(), fileMessageRequest.getFileData()), pseudo, messageRequest.getRoomName()));
+                        GlobalMessage computedMessage = new GlobalMessage("message", new MessageInfo("file", new FileMessageInfo(fileMessageRequest.getFileName(), fileMessageRequest.getFileData()), pseudo, messageRequest.getRoomName()));
                         computedMessage.setDate();
                         MainServer.broadcastMessage(computedMessage, clientSocket);
                         MainServer.saveInHistory(computedMessage);

@@ -23,31 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/stream/core/infos/FileMessageInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/infos/MessageInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/infos/NewRoomInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/infos/TextMessageInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/infos/UserJoinedRoomInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/infos/UserLeftRoomInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/ConnectRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/CreateRoomRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/DisconnectRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/FileMessageRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/JoinRoomRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/LeaveRoomRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/MessageRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream/core/requests/TextMessageRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/history.ser" beforeDir="false" afterPath="$PROJECT_DIR$/history.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/PseudoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/PseudoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/client/view/RoomManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/RoomManagementPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/core/FileMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/core/GlobalMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/GlobalMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stream/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stream/server/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/MainServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +119,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603009176537</updated>
-      <workItem from="1603009201091" duration="11480000" />
+      <workItem from="1603009201091" duration="11812000" />
     </task>
     <servers />
   </component>
@@ -176,22 +154,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="768" y="240" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603020642460" />
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1603021957668">
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1603022295844">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603021957668" />
-    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1603021957668">
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295844" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1603022295839">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603021957668" />
-    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1603021957667">
+    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1603022295839">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603021957667" />
-    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1603021957668">
+    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1603022295840">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603021957668" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295840" />
     <state width="1874" height="344" key="GridCell.Tab.1.bottom" timestamp="1603014871210">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -208,9 +186,9 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="344" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603014871210" />
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1603021886440">
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1603022315423">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603021886440" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603022315423" />
   </component>
 </project>
