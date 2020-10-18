@@ -3,8 +3,8 @@ package stream.client.view;
 import stream.client.controller.ChatController;
 import stream.client.view.utils.ColorUtil;
 import stream.client.view.utils.FontUtil;
-import stream.core.FileMessage;
 import stream.core.GlobalMessage;
+import stream.core.infos.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -144,9 +144,7 @@ public class ChatPanel {
         chatListPanel.add(chatSpacer, spacerConstraints);
         gridBagConstraints.gridy = 1;
         for(GlobalMessage message: messages) {
-            if (message.getRoomName().equals(currentRoom)) {
-                renderMessage(message);
-            }
+            renderMessage(message);
         }
 
         return view;
@@ -158,11 +156,9 @@ public class ChatPanel {
      */
     public void onReceiveMessage(GlobalMessage message) {
         messages.add(message);
-        if (message.getRoomName().equals(currentRoom)) {
-            renderMessage(message);
-            chatListPanel.revalidate();
-            chatListPanel.repaint();
-        }
+        renderMessage(message);
+        chatListPanel.revalidate();
+        chatListPanel.repaint();
     }
 
     /**
@@ -407,111 +403,123 @@ public class ChatPanel {
         messagePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         switch (message.getType()) {
-            case "message-file": {
-                messagePanel.setLayout(new GridBagLayout());
+            case "message": {
+                MessageInfo messageInfo = (MessageInfo)message.getData();
+                if (!messageInfo.getRoomName().equals(currentRoom)) return;
+                switch(messageInfo.getType()) {
+                    case "text": {
+                        TextMessageInfo textMessageInfo = (TextMessageInfo)messageInfo.getData();
 
-                JPanel topContainer = new JPanel();
-                topContainer.setLayout(new GridBagLayout());
-                topContainer.setOpaque(false);
+                        messagePanel.setLayout(new GridBagLayout());
 
-                JLabel pseudoLabel = new JLabel(message.getPseudo());
-                pseudoLabel.setForeground(new Color(50, 50, 50));
-                pseudoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+                        JPanel topContainer = new JPanel();
+                        topContainer.setLayout(new GridBagLayout());
+                        topContainer.setOpaque(false);
 
-                JLabel dateLabel = new JLabel(message.getDate(), SwingConstants.RIGHT);
-                dateLabel.setForeground(new Color(50, 50, 50));
-                dateLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+                        JLabel pseudoLabel = new JLabel(messageInfo.getUserPseudo());
+                        pseudoLabel.setForeground(new Color(50, 50, 50));
+                        pseudoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
 
-                GridBagConstraints constraints = new GridBagConstraints();
-                constraints.fill = GridBagConstraints.HORIZONTAL;
-                constraints.weightx = 1;
-                constraints.weighty = 1;
-                topContainer.add(pseudoLabel, constraints);
-                topContainer.add(dateLabel, constraints);
+                        JLabel dateLabel = new JLabel(message.getDate(), SwingConstants.RIGHT);
+                        dateLabel.setForeground(new Color(50, 50, 50));
+                        dateLabel.setFont(new Font("Arial", Font.PLAIN, 12));
 
-                topContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
+                        GridBagConstraints constraints = new GridBagConstraints();
+                        constraints.fill = GridBagConstraints.HORIZONTAL;
+                        constraints.weightx = 1;
+                        constraints.weighty = 1;
+                        topContainer.add(pseudoLabel, constraints);
+                        topContainer.add(dateLabel, constraints);
 
-                FileMessage fileMessage = (FileMessage)message.getData();
-                String[] fileNameSplit = fileMessage.getFileName().split("\\.");
-                String fileExt = fileNameSplit[fileNameSplit.length - 1];
-                JLabel messageLabel;
-                if (imagesExtensions.contains(fileExt)) {
-                    try {
-                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(fileMessage.getFileBytes()));
-                        Image finalImage;
-                        if (image.getWidth() > image.getHeight()) {
-                            finalImage = image.getScaledInstance(400, (image.getHeight() * 400) / image.getWidth(), 0);
-                        } else {
-                            finalImage = image.getScaledInstance((image.getWidth() * 300) / image.getHeight(), 300, 0);
-                        }
-                        ImageIcon imageIcon = new ImageIcon(finalImage);
-                        messageLabel = new JLabel(imageIcon);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        messageLabel = new JLabel("Cannot load image");
+                        topContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+                        JLabel messageLabel = new JLabel(textMessageInfo.getContent());
+                        messageLabel.setForeground(new Color(25, 25, 25));
+                        messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                        messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+                        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+                        gridBagConstraints.weighty = 1;
+                        gridBagConstraints.weightx = 1;
+                        gridBagConstraints.gridy = 0;
+                        gridBagConstraints.gridx = 0;
+                        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+
+                        messagePanel.add(topContainer, gridBagConstraints);
+                        gridBagConstraints.gridy = 1;
+                        messagePanel.add(messageLabel, gridBagConstraints);
+                        break;
                     }
-                } else {
-                    messageLabel = new JLabel("File");
+                    case "file": {
+                        FileMessageInfo fileMessageInfo = (FileMessageInfo)messageInfo.getData();
+
+                        messagePanel.setLayout(new GridBagLayout());
+
+                        JPanel topContainer = new JPanel();
+                        topContainer.setLayout(new GridBagLayout());
+                        topContainer.setOpaque(false);
+
+                        JLabel pseudoLabel = new JLabel(messageInfo.getUserPseudo());
+                        pseudoLabel.setForeground(new Color(50, 50, 50));
+                        pseudoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                        JLabel dateLabel = new JLabel(message.getDate(), SwingConstants.RIGHT);
+                        dateLabel.setForeground(new Color(50, 50, 50));
+                        dateLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                        GridBagConstraints constraints = new GridBagConstraints();
+                        constraints.fill = GridBagConstraints.HORIZONTAL;
+                        constraints.weightx = 1;
+                        constraints.weighty = 1;
+                        topContainer.add(pseudoLabel, constraints);
+                        topContainer.add(dateLabel, constraints);
+
+                        topContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+                        String[] fileNameSplit = fileMessageInfo.getFileName().split("\\.");
+                        String fileExt = fileNameSplit[fileNameSplit.length - 1];
+                        JLabel messageLabel;
+                        if (imagesExtensions.contains(fileExt)) {
+                            try {
+                                BufferedImage image = ImageIO.read(new ByteArrayInputStream(fileMessageInfo.getFileContent()));
+                                Image finalImage;
+                                if (image.getWidth() > image.getHeight()) {
+                                    finalImage = image.getScaledInstance(400, (image.getHeight() * 400) / image.getWidth(), 0);
+                                } else {
+                                    finalImage = image.getScaledInstance((image.getWidth() * 300) / image.getHeight(), 300, 0);
+                                }
+                                ImageIcon imageIcon = new ImageIcon(finalImage);
+                                messageLabel = new JLabel(imageIcon);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                messageLabel = new JLabel("Cannot load image");
+                            }
+                        } else {
+                            messageLabel = new JLabel("File");
+                        }
+                        messageLabel.setForeground(new Color(25, 25, 25));
+                        messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                        messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+                        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+                        gridBagConstraints.weighty = 1;
+                        gridBagConstraints.weightx = 1;
+                        gridBagConstraints.gridy = 0;
+                        gridBagConstraints.gridx = 0;
+                        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+
+                        messagePanel.add(topContainer, gridBagConstraints);
+                        gridBagConstraints.gridy = 1;
+                        gridBagConstraints.anchor = GridBagConstraints.EAST;
+                        messagePanel.add(messageLabel, gridBagConstraints);
+                        break;
+                    }
                 }
-                messageLabel.setForeground(new Color(25, 25, 25));
-                messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-                messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-                GridBagConstraints gridBagConstraints = new GridBagConstraints();
-                gridBagConstraints.weighty = 1;
-                gridBagConstraints.weightx = 1;
-                gridBagConstraints.gridy = 0;
-                gridBagConstraints.gridx = 0;
-                gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-
-                messagePanel.add(topContainer, gridBagConstraints);
-                gridBagConstraints.gridy = 1;
-                gridBagConstraints.anchor = GridBagConstraints.EAST;
-                messagePanel.add(messageLabel, gridBagConstraints);
                 break;
             }
-            case "message-txt": {
-                messagePanel.setLayout(new GridBagLayout());
-
-                JPanel topContainer = new JPanel();
-                topContainer.setLayout(new GridBagLayout());
-                topContainer.setOpaque(false);
-
-                JLabel pseudoLabel = new JLabel(message.getPseudo());
-                pseudoLabel.setForeground(new Color(50, 50, 50));
-                pseudoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-
-                JLabel dateLabel = new JLabel(message.getDate(), SwingConstants.RIGHT);
-                dateLabel.setForeground(new Color(50, 50, 50));
-                dateLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-
-                GridBagConstraints constraints = new GridBagConstraints();
-                constraints.fill = GridBagConstraints.HORIZONTAL;
-                constraints.weightx = 1;
-                constraints.weighty = 1;
-                topContainer.add(pseudoLabel, constraints);
-                topContainer.add(dateLabel, constraints);
-
-                topContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-                JLabel messageLabel = new JLabel((String)message.getData());
-                messageLabel.setForeground(new Color(25, 25, 25));
-                messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-                messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-                GridBagConstraints gridBagConstraints = new GridBagConstraints();
-                gridBagConstraints.weighty = 1;
-                gridBagConstraints.weightx = 1;
-                gridBagConstraints.gridy = 0;
-                gridBagConstraints.gridx = 0;
-                gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-
-                messagePanel.add(topContainer, gridBagConstraints);
-                gridBagConstraints.gridy = 1;
-                messagePanel.add(messageLabel, gridBagConstraints);
-                break;
-            }
-            case "join-room": {
+            case "room-joined": {
+                UserJoinedRoomInfo userJoinedRoomInfo = (UserJoinedRoomInfo)message.getData();
+                if (!userJoinedRoomInfo.getRoomName().equals(currentRoom)) return;
                 messagePanel.setLayout(new GridBagLayout());
                 try {
                     Image image = ImageIO.read(new File("assets/green-arrow.png"));
@@ -523,7 +531,7 @@ public class ChatPanel {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                JLabel messageLabel = new JLabel(message.getPseudo() + " joined the chat!");
+                JLabel messageLabel = new JLabel(userJoinedRoomInfo.getPseudo() + " joined the chat!");
                 messageLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
                 messageLabel.setForeground(new Color(6, 122, 37));
                 messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -541,7 +549,9 @@ public class ChatPanel {
                 messagePanel.add(dateLabel, constraints);
                 break;
             }
-            case "leave-room": {
+            case "room-left": {
+                UserLeftRoomInfo userLeftRoomInfo = (UserLeftRoomInfo)message.getData();
+                if (!userLeftRoomInfo.getRoomName().equals(currentRoom)) return;
                 messagePanel.setLayout(new GridBagLayout());
                 try {
                     Image image = ImageIO.read(new File("assets/red-arrow.png"));
@@ -553,7 +563,7 @@ public class ChatPanel {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                JLabel messageLabel = new JLabel(message.getPseudo() + " left the chat!");
+                JLabel messageLabel = new JLabel(userLeftRoomInfo.getPseudo() + " left the chat!");
                 messageLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
                 messageLabel.setForeground(new Color(122, 21, 6));
                 messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));

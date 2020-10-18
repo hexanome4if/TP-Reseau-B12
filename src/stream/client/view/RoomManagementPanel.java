@@ -4,6 +4,7 @@ import stream.client.controller.ChatController;
 import stream.client.view.utils.ColorUtil;
 import stream.client.view.utils.FontUtil;
 import stream.core.GlobalMessage;
+import stream.core.infos.NewRoomInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -83,11 +84,11 @@ public class RoomManagementPanel {
      */
     public void onGetRoom(GlobalMessage message) {
         JPanel newRoomPanel = new JPanel();
-
-        renderRoom((String)message.getData(), newRoomPanel);
+        NewRoomInfo newRoomInfo = (NewRoomInfo)message.getData();
+        renderRoom(newRoomInfo.getRoomName(), newRoomPanel);
         roomContainer.add(newRoomPanel, roomListConstraints);
         ++roomListConstraints.gridy;
-        roomEntries.put((String) message.getData(), newRoomPanel);
+        roomEntries.put(newRoomInfo.getRoomName(), newRoomPanel);
 
         roomContainer.revalidate();
         roomContainer.repaint();
