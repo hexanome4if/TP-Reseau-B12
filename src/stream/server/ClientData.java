@@ -3,6 +3,8 @@ package stream.server;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,12 +28,18 @@ public class ClientData {
     private String pseudo;
 
     /**
+     * Client rooms
+     */
+    private final List<String> rooms;
+
+    /**
      * Create a new client data for a given client represented by it's socket
      * @param socket the client socket
      */
     public ClientData(Socket socket) {
         this.socket = socket;
         this.pseudo = null;
+        this.rooms = new ArrayList<>();
         try {
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException ex) {
@@ -69,6 +77,30 @@ public class ClientData {
      */
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
+    }
+
+    /**
+     * Add a room to the client rooms list
+     * @param roomName the room name to add
+     */
+    public void joinRoom(String roomName) {
+        rooms.add(roomName);
+    }
+
+    /**
+     * Remove a room from the client rooms list
+     * @param roomName the room name to remove
+     */
+    public void leaveRoom(String roomName) {
+        rooms.remove(roomName);
+    }
+
+    /**
+     * Get client joined rooms
+     * @return client joined rooms
+     */
+    public List<String> getJoinedRooms() {
+        return rooms;
     }
 
 

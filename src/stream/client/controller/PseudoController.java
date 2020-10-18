@@ -25,8 +25,11 @@ public class PseudoController {
      * @param pseudo user pseudo
      */
     public void sendPseudo(String pseudo) {
-        MainClient.send(new GlobalMessage(pseudo, "connect", null));
-        new ChatView().show(); // Open the chat view
+        MainClient.send(new GlobalMessage(pseudo, "connect", null, null));
+        ChatView chatView = new ChatView();
+        chatView.show(); // Open the chat view
+        chatView.renderRoomManagementPanel();
+
         pseudoView.close(); // Close the pseudo view
     }
 

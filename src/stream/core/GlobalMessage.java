@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class GlobalMessage implements Serializable {
     /**
-     * Message type can be "message" | "set_pseudo" | "disconnect"
+     * Message type
      */
     private final String type;
 
@@ -21,6 +21,11 @@ public class GlobalMessage implements Serializable {
     private final String pseudo;
 
     /**
+     * Message room
+     */
+    private final String roomName;
+
+    /**
      * Message date
      */
     private String date;
@@ -30,9 +35,10 @@ public class GlobalMessage implements Serializable {
      * @param type message type
      * @param data message data
      */
-    public GlobalMessage(String type, Object data) {
+    public GlobalMessage(String type, Object data, String roomName) {
         this.type = type;
         this.data = data;
+        this.roomName = roomName;
         this.pseudo = "";
         this.date = "";
     }
@@ -43,10 +49,11 @@ public class GlobalMessage implements Serializable {
      * @param type message type
      * @param data message data
      */
-    public GlobalMessage(String pseudo, String type, Object data) {
+    public GlobalMessage(String pseudo, String type, Object data, String roomName) {
         this.pseudo = pseudo;
         this.type = type;
         this.data = data;
+        this.roomName = roomName;
     }
 
     /**
@@ -80,6 +87,12 @@ public class GlobalMessage implements Serializable {
     public String getDate() { return date; }
 
     /**
+     * Get message room
+     * @return message room
+     */
+    public String getRoomName() { return roomName; }
+
+    /**
      * Set the message date in a readable format
      */
     public void setDate() {
@@ -87,4 +100,6 @@ public class GlobalMessage implements Serializable {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         this.date = format.format(date);
     }
+
+
 }

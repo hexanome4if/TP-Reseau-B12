@@ -1,8 +1,11 @@
 package stream.server;
 
 import stream.core.GlobalMessage;
+import sun.applet.Main;
+
 import java.io.*;
 import java.net.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,26 +72,73 @@ public class ClientThread extends Thread {
      */
     private void handleMessage(GlobalMessage message) throws IOException {
         switch (message.getType()) {
+            case "join-room": {
+                String roomName = (String)message.getData();
+                ClientData clientData = ClientContainer.getClient(clientSocket);
+
+                if (clientData != null) {
+                    List<String> rooms = clientData.getJoinedRooms();
+                    if (!rooms.contains(roomName)) {
+                        clientData.joinRoom(roomName);
+                        GlobalMessage computedMessage = new GlobalMessage(pseudo, "join-room", null, roomName);
+                        computedMessage.setDate();
+                        MainServer.broadcastMessage(computedMessage, clientSocket);
+                        MainServer.saveInHistory(computedMessage);
+                    }
+                }
+                break;
+            }
+            case "leave-room": {
+                String roomName = (String)message.getData();
+                ClientData clientData = ClientContainer.getClient(clientSocket);
+
+                if (clientData != null) {
+                    List<String> rooms = clientData.getJoinedRooms();
+                    if (rooms.contains(roomName)) {
+                        clientData.leaveRoom(roomName);
+                        GlobalMessage computedMessage = new GlobalMessage(pseudo, "leave-room", null, roomName);
+                        computedMessage.setDate();
+                        MainServer.broadcastMessage(computedMessage, clientSocket);
+                        MainServer.saveInHistory(computedMessage);
+                    }
+                }
+                break;
+            }
+            case "create-room": {
+                if (RoomManager.addRoom((String) message.getData())) {
+                    GlobalMessage computedMessage = new GlobalMessage("room", message.getData(), null);
+                    MainServer.broadcastMessage(computedMessage, null);
+                }
+
+                break;
+            }
             case "message-txt": {
-                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message-txt",message.getData());
+                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message-txt",message.getData(), message.getRoomName());
                 computedMessage.setDate();
                 MainServer.broadcastMessage(computedMessage, clientSocket);
+                MainServer.saveInHistory(computedMessage);
                 break;
             }
             case "message-file": {
-                GlobalMessage computedMessage = new GlobalMessage(pseudo, "message-file", message.getData());
+                GlobalMessage computedMessage = new GlobalMessage(pseudo, "message-file", message.getData(), message.getRoomName());
                 computedMessage.setDate();
                 MainServer.broadcastMessage(computedMessage, clientSocket);
+                MainServer.saveInHistory(computedMessage);
             }
             case "disconnect": {
                 disconnect();
                 break;
             }
             case "connect": {
-              ClientContainer.getClient(clientSocket).setPseudo(message.getPseudo());
-              pseudo = message.getPseudo();
-              message.setDate();
-              MainServer.broadcastMessage(message, clientSocket);
+                System.out.println("Connect");
+                ClientData clientData = ClientContainer.getClient(clientSocket);
+                if (clientData != null) {
+                    System.out.println("Ok");
+                    clientData.setPseudo(message.getPseudo());
+                    pseudo = message.getPseudo();
+                    MainServer.sendHistory(clientSocket);
+                    MainServer.sendRooms(clientSocket);
+                }
               break;
             }
         }
@@ -98,11 +148,18 @@ public class ClientThread extends Thread {
      * Method to handle client disconnection (stopping thread, remove client from connected clients list, send disconnection message to everyone)
      */
     private void disconnect() throws IOException {
-      stopLoop = true;
-      ClientContainer.removeClient(clientSocket);
-      GlobalMessage computedMessage = new GlobalMessage(pseudo,"disconnect",null);
-      computedMessage.setDate();
-      MainServer.broadcastMessage(computedMessage, clientSocket);
+        stopLoop = true;
+        ClientData clientData = ClientContainer.getClient(clientSocket);
+        if (clientData != null) {
+            // Send a leave message to every joined room
+            for(String room: clientData.getJoinedRooms()) {
+                GlobalMessage computedMessage = new GlobalMessage(pseudo, "leave-room", null, room);
+                computedMessage.setDate();
+                MainServer.broadcastMessage(computedMessage, clientSocket);
+                MainServer.saveInHistory(computedMessage);
+            }
+        }
+        ClientContainer.removeClient(clientSocket);
     }
 
 }
