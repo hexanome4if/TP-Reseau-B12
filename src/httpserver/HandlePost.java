@@ -7,20 +7,20 @@ public class HandlePost extends AbstractHandle {
 
     @Override
     public Response execute(Request request) {
-        Response response = new Response();
-        try {
-            File resource = new File("src/httpserver/resources/" + request.getPath());
+        File resource = getResource(request.getPath(), true);
 
-            if (resource.exists() && !resource.isDirectory()) {
-
-            } else {
-                if (resource.createNewFile()) {
-
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (resource == null) {
+            // Return 404
         }
+
+        if (!resource.canWrite()) {
+            // Return 400
+        }
+
+        Response response = new Response();
+
+
+
         return response;
     }
 
