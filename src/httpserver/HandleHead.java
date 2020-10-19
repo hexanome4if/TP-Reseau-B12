@@ -6,6 +6,7 @@ public class HandleHead extends AbstractHandle {
         HandleGet getHandler = new HandleGet();
         Response response = getHandler.execute(request);
         response.setBody("");
+        response.setByteBody(new byte []{});
         return response;
     }
 }
