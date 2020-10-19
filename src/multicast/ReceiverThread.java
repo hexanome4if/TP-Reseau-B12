@@ -1,30 +1,41 @@
 /***
- * EchoClient
- * Example of a TCP client
- * Date: 10/01/04
- * Authors:
+ * ReceiverThread
+ * Receiver thread for a multicast UDP client
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
  */
+
 package multicast;
 
 import java.io.*;
 import java.net.*;
 
-
-
 public class ReceiverThread extends Thread {
 
+  /**
+  * multicast socket of the client
+  **/
   private MulticastSocket multicastSocket;
-  private InetAddress groupAddr;
-  private int groupPort;
+  /**
+  * boolean used to run and stop the thread
+  **/
   private boolean run = true;
+  /**
+  * datagram packet received
+  **/
   private DatagramPacket recv = null;
 
-  ReceiverThread(MulticastSocket s, InetAddress groupAddr, int groupPort) {
+  /**
+  * ReceiverThread constructor
+  * @param s multicast socket of the client
+  **/
+  ReceiverThread(MulticastSocket s) {
     this.multicastSocket = s;
-    this.groupPort = groupPort;
-    this.groupAddr = groupAddr;
   }
 
+  /**
+  *  Run the thread to receive Datagram packets
+  **/
   public void run() {
         try {
           while (run) {
@@ -41,7 +52,10 @@ public class ReceiverThread extends Thread {
         }
   }
 
-  public void disconnect() throws IOException {
+  /**
+  *  Stop the thread
+  **/
+  public void disconnect() {
     run = false;
   }
 
