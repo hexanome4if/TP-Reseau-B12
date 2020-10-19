@@ -1,38 +1,34 @@
 package stream.core;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GlobalMessage implements Serializable {
     /**
-     * Message type can be "message" | "set_pseudo" | "disconnect"
+     * Message type
      */
     private final String type;
 
     /**
      * Message data corresponding to the message type
      */
-    private final String data;
+    private final Object data;
 
     /**
-     * Message client pseudo (can be empty)
+     * Message date
      */
-    private final String pseudo;
+    private String date;
 
     /**
      * Create a new global message to send over network
      * @param type message type
      * @param data message data
      */
-    public GlobalMessage(String type, String data) {
+    public GlobalMessage(String type, Object data) {
         this.type = type;
         this.data = data;
-        this.pseudo = "";
-    }
-
-    public GlobalMessage(String pseudo, String type, String data) {
-        this.pseudo = pseudo;
-        this.type = type;
-        this.data = data;
+        this.date = "";
     }
 
     /**
@@ -47,16 +43,24 @@ public class GlobalMessage implements Serializable {
      * Get message data
      * @return message data
      */
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
     /**
-     * Get message pseudo
-     * @return message pseudo
+     * Get message date
+     * @return message date
      */
-    public String getPseudo() {
-        return pseudo;
+    public String getDate() { return date; }
+
+    /**
+     * Set the message date in a readable format
+     */
+    public void setDate() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        this.date = format.format(date);
     }
+
 
 }

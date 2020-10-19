@@ -1,25 +1,35 @@
 package stream.server;
 
 import stream.core.GlobalMessage;
+import stream.core.infos.NewRoomInfo;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.Semaphore;
 
 /**
  * @author polo
  */
 public class MainServer {
+    private static final String nomFichierSerialization = "history.ser";
+    /**
+     * History of sent messages
+     */
+    private static final List<GlobalMessage> history = new ArrayList<>();
+    /**
+     * Lock to handle concurrency on the clients socket
+     */
+    private static final Semaphore socketLock = new Semaphore(1);
 
-    private static List<GlobalMessage> history = new ArrayList<>();
     private static ObjectOutputStream oos = null;
     private static FileOutputStream fos = null;
     private static ObjectInputStream ois = null;
     private static FileInputStream fis = null;
-    private static String nomFichierSerialization = "history.ser";
 
     /**
      * Start a TCP server on the port specified as the first CLI argument
+     *
      * @param args CLI arguments
      */
     public static void main(String[] args) throws Exception {
@@ -33,22 +43,24 @@ public class MainServer {
 
         //On lit l'historique des messages
         try {
-          fis = new FileInputStream(nomFichierSerialization);
-          ois = new ObjectInputStream(fis);
+            fis = new FileInputStream(nomFichierSerialization);
+            ois = new ObjectInputStream(fis);
 
-          while(true) {
-              try {
-                history.add((GlobalMessage) ois.readObject());
-              } catch(EOFException ex) {
-                break;
-              }
+            while (true) {
+                try {
+                    history.add((GlobalMessage) ois.readObject());
+                } catch (EOFException ex) {
+                    break;
+                }
 
-          }
-
-        } catch(FileNotFoundException e) {
-          //On est arrivé à la fin du fichier, on passe à la suite
+            }
+        } catch (EOFException e) {
+            // Do nothing
         }
 
+
+        // Find saved rooms
+        RoomManager.init();
 
         // Start the TCP server
         startServer(port);
@@ -56,6 +68,7 @@ public class MainServer {
 
     /**
      * Start a TCP server on the given port
+     *
      * @param port the port the server should listen to
      */
     private static void startServer(int port) throws IOException {
@@ -63,8 +76,8 @@ public class MainServer {
         fos = new FileOutputStream(nomFichierSerialization);
         oos = new ObjectOutputStream(fos);
 
-        for(GlobalMessage gm : history) {
-          oos.writeObject(gm); //on réécrit les andiens messages
+        for (GlobalMessage gm : history) {
+            oos.writeObject(gm); //on réécrit les anciens messages
         }
 
         ServerSocket listenSocket;
@@ -90,36 +103,38 @@ public class MainServer {
 
     /**
      * Broadcast a message to every connected client except the one identified by socket
+     *
      * @param message message to send
-     * @param socket client socket to ignore during broadcast
+     * @param socket  client socket to ignore during broadcast
      */
-    public static synchronized void broadcastMessage(GlobalMessage message, Socket socket) throws IOException {
+    public static void broadcastMessage(GlobalMessage message, Socket socket) throws IOException {
+        try {
+            socketLock.acquire();
+            // Get every connected clients
+            Collection<ClientData> clients = ClientContainer.getClients();
 
-        // Get every connected clients
-        Collection<ClientData> clients = ClientContainer.getClients();
 
+            /*if(clients.size() <= 1 && !message.getPseudo().equals("")) //Si c'est le premier client connecté ou le dernier à se déconnecter
+            {
+              if (message.getType().equals("connect")) {
+                history.add(message);
+                oos.writeObject(message);
+                oos.flush();
+              } else if (message.getType().equals("disconnect") && clients.size() == 0) {
+                history.add(message);
+                oos.writeObject(message);
+                oos.flush();
+              }
+            }*/
+            System.out.println("Will send message: " + message.getType());
+            for (ClientData client : clients) {
+                // Check if the client is not the one which should be ignored
+                if (client.getSocket() != socket && client.getPseudo() != null) {
+                    try {
+                        System.out.println("Send message: " + message.getType());
+                        client.getOutputStream().writeObject(message); // Send the message
 
-        if(clients.size() <= 1 && !message.getPseudo().equals("")) //Si c'est le premier client connecté ou le dernier à se déconnecter
-        {
-          if (message.getType().equals("connect")) {
-            GlobalMessage gm = new GlobalMessage(message.getPseudo(),"message","join the chat");
-            history.add(gm);
-            oos.writeObject(gm);
-            oos.flush();
-          } else if (message.getType().equals("disconnect") && clients.size() == 0) {
-            GlobalMessage gm = new GlobalMessage(message.getPseudo(),"message","left the chat");
-            history.add(gm);
-            oos.writeObject(gm);
-            oos.flush();
-          }
-        }
-
-        for(ClientData client : clients) {
-            // Check if the client is not the one which should be ignored
-            if (client.getSocket() != socket && client.getPseudo() != null) {
-                try {
-                    client.getOutputStream().writeObject(message); // Send the message
-                    switch (message.getType()) {
+                    /*switch (message.getType()) {
                         case "message": {
                             GlobalMessage gm = new GlobalMessage(message.getPseudo(),"message",message.getData());
                             history.add(gm);
@@ -138,28 +153,83 @@ public class MainServer {
                             oos.writeObject(gm);
                             break;
                         }
+                    }*/
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    oos.flush();
+                }
+
+            }
+            socketLock.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Send the history to a client
+     * @param socket the client to send the history to
+     */
+    public static void sendHistory(Socket socket) {
+        ClientData client = ClientContainer.getClient(socket);
+        if (client == null) return;
+        try {
+            socketLock.acquire();
+            for (GlobalMessage gm : history) {
+                try {
+                    client.getOutputStream().writeObject(gm);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    oos.flush();
-                    oos.close();
                 }
             }
-            if (client.getSocket() == socket && client.getPseudo() != null) // On envoie l'historique au nouvel arrivant
-            {
-              if(message.getType().equals("connect"))
-              {
-                for(GlobalMessage gm : history)
-                {
-                  try {
-                    client.getOutputStream().writeObject(gm);
-                  } catch (IOException e) {
-                      e.printStackTrace();
-                  }
+            socketLock.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Send every rooms to a client
+     * @param socket the client to send the rooms to
+     */
+    public static void sendRooms(Socket socket) {
+        System.out.println("Send rooms");
+        ClientData client = ClientContainer.getClient(socket);
+        if (client == null) return;
+        try {
+            socketLock.acquire();
+            try {
+                RoomManager.lockRooms();
+                System.out.println(RoomManager.rooms.size());
+                for(String room : RoomManager.rooms) {
+                    try {
+                        client.getOutputStream().writeObject(new GlobalMessage("room-new", new NewRoomInfo(room)));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-              }
+                RoomManager.releaseRooms();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            socketLock.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save a message in the history
+     * @param message the message to save
+     */
+    public static void saveInHistory(GlobalMessage message) {
+        // Add the message in the history
+        try {
+            history.add(message);
+            oos.writeObject(message);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
