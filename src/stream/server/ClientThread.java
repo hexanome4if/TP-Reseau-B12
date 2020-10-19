@@ -84,6 +84,7 @@ public class ClientThread extends Thread {
                     List<String> rooms = clientData.getJoinedRooms();
                     if (!rooms.contains(joinRoomRequest.getRoomName())) {
                         clientData.joinRoom(joinRoomRequest.getRoomName());
+                        RoomManager.joinRoom(joinRoomRequest.getRoomName(), clientData.getId());
                         GlobalMessage computedMessage = new GlobalMessage("room-joined", new UserJoinedRoomInfo(pseudo, joinRoomRequest.getRoomName()));
                         computedMessage.setDate();
                         MainServer.broadcastMessage(computedMessage, clientSocket);
@@ -100,6 +101,7 @@ public class ClientThread extends Thread {
                     List<String> rooms = clientData.getJoinedRooms();
                     if (rooms.contains(leaveRoomRequest.getRoomName())) {
                         clientData.leaveRoom(leaveRoomRequest.getRoomName());
+                        RoomManager.leaveRoom(leaveRoomRequest.getRoomName(), clientData.getId());
                         GlobalMessage computedMessage = new GlobalMessage("room-left", new UserLeftRoomInfo(pseudo, leaveRoomRequest.getRoomName()));
                         computedMessage.setDate();
                         MainServer.broadcastMessage(computedMessage, clientSocket);
@@ -111,7 +113,7 @@ public class ClientThread extends Thread {
             case "create-room": {
                 CreateRoomRequest createRoomRequest = (CreateRoomRequest)message.getData();
                 if (RoomManager.addRoom(createRoomRequest.getRoomName())) {
-                    GlobalMessage computedMessage = new GlobalMessage("room-new", new NewRoomInfo(createRoomRequest.getRoomName()));
+                    GlobalMessage computedMessage = new GlobalMessage("room-new", new NewRoomInfo(createRoomRequest.getRoomName(), new UserInfo[] {}));
                     MainServer.broadcastMessage(computedMessage, null);
                 }
 
@@ -166,6 +168,7 @@ public class ClientThread extends Thread {
         if (clientData != null) {
             // Send a leave message to every joined room
             for(String room: clientData.getJoinedRooms()) {
+                RoomManager.leaveRoom(room, clientData.getId());
                 GlobalMessage computedMessage = new GlobalMessage("room-left", new UserLeftRoomInfo(pseudo, room));
                 computedMessage.setDate();
                 MainServer.broadcastMessage(computedMessage, clientSocket);

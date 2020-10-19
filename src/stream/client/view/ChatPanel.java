@@ -1,5 +1,6 @@
 package stream.client.view;
 
+import stream.client.RoomEntry;
 import stream.client.controller.ChatController;
 import stream.client.view.utils.ColorUtil;
 import stream.client.view.utils.FontUtil;
@@ -90,11 +91,15 @@ public class ChatPanel {
      * Room list panel component
      */
     private JPanel roomListPanel;
+    /**
+     * Connected users in room panel
+     */
+    private JPanel roomConnectedUsersPanel;
 
     /**
      * Room focused by user
      */
-    private String currentRoom;
+    private RoomEntry currentRoom;
 
     /**
      * Create a new chat panel component to render
@@ -114,7 +119,7 @@ public class ChatPanel {
      * @return the global container panel
      */
     public JPanel render() {
-        java.util.List<String> joinedRooms = chatController.getJoinedRooms();
+        java.util.List<RoomEntry> joinedRooms = chatController.getJoinedRooms();
         if (joinedRooms.size() == 0) {
             // Error here
             currentRoom = null;
@@ -194,6 +199,11 @@ public class ChatPanel {
         centerConstraints.gridx = 1;
         centerConstraints.weightx = 8;
         centerPanel.add(renderChat(), centerConstraints);
+        centerConstraints.gridx = 2;
+        centerConstraints.weightx = 1;
+        roomConnectedUsersPanel = new JPanel();
+        renderConnectedUsers();
+        centerPanel.add(roomConnectedUsersPanel, centerConstraints);
         view.add(centerPanel, constraints);
 
         // Bottom bar
@@ -287,7 +297,7 @@ public class ChatPanel {
 
         JPanel roomContainer = new JPanel(new GridBagLayout());
 
-        java.util.List<String> joinedRooms = chatController.getJoinedRooms();
+        java.util.List<RoomEntry> joinedRooms = chatController.getJoinedRooms();
 
         GridBagConstraints spacerConstraints = new GridBagConstraints();
         spacerConstraints.gridx = 0;
@@ -306,13 +316,13 @@ public class ChatPanel {
         roomConstraints.fill = GridBagConstraints.HORIZONTAL;
         roomConstraints.anchor = GridBagConstraints.NORTH;
 
-        for(String room: joinedRooms) {
+        for(RoomEntry room: joinedRooms) {
             JPanel roomPanel = new JPanel(new GridBagLayout());
             roomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-            if (room.equals(currentRoom)) {
+            if (room.getRoomName().equals(currentRoom)) {
                 roomPanel.setBackground(new Color(200, 200, 200));
             }
-            JLabel roomName = new JLabel(room);
+            JLabel roomName = new JLabel(room.getRoomName());
             roomName.setForeground(ColorUtil.black);
             roomName.setFont(FontUtil.defaultFont);
             roomPanel.add(roomName);
@@ -353,6 +363,12 @@ public class ChatPanel {
 
         JScrollPane scroller = new JScrollPane(roomContainer);
         roomListPanel.add(scroller, constraints);
+    }
+
+    private void renderConnectedUsers() {
+        roomConnectedUsersPanel.setLayout(new GridBagLayout());
+        roomConnectedUsersPanel.setBackground(new Color(255, 0, 0));
+        GridBagConstraints constraints = new GridBagConstraints();
     }
 
     /**
@@ -603,7 +619,7 @@ public class ChatPanel {
         // Send message on click on the send button
         sendMessageBTN.addActionListener(actionEvent -> {
             if (currentRoom == null) return;
-            chatController.sendMessage(messageIF.getText(), currentRoom);
+            chatController.sendMessage(messageIF.getText(), currentRoom.getRoomName());
             messageIF.setText("");
         });
 
@@ -613,7 +629,7 @@ public class ChatPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (currentRoom == null) return;
-                chatController.sendMessage(messageIF.getText(), currentRoom);
+                chatController.sendMessage(messageIF.getText(), currentRoom.getRoomName());
                 messageIF.setText("");
             }
         });
@@ -622,7 +638,7 @@ public class ChatPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (currentRoom == null) return;
-                chatController.sendMessage(messageIF.getText(), currentRoom);
+                chatController.sendMessage(messageIF.getText(), currentRoom.getRoomName());
                 messageIF.setText("");
             }
         });
@@ -636,7 +652,7 @@ public class ChatPanel {
             if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = chooser.getSelectedFile();
                 try {
-                    chatController.sendFile(selectedFile, currentRoom);
+                    chatController.sendFile(selectedFile, currentRoom.getRoomName());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

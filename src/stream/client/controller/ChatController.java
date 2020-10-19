@@ -2,10 +2,12 @@ package stream.client.controller;
 
 import stream.client.MainClient;
 import stream.client.ReceiverThread;
+import stream.client.RoomEntry;
 import stream.client.view.ChatView;
 import stream.core.GlobalMessage;
 import stream.core.infos.FileMessageInfo;
 import stream.core.infos.MessageInfo;
+import stream.core.infos.NewRoomInfo;
 import stream.core.infos.TextMessageInfo;
 import stream.core.requests.*;
 
@@ -13,13 +15,20 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChatController {
     /**
+     * List of all rooms
+     */
+    private final java.util.Map<String, RoomEntry> allRooms = new HashMap<>();
+
+    /**
      * List of user rooms
      */
-    private final java.util.List<String> joinedRooms = new ArrayList<>();
+    private final java.util.Map<String, RoomEntry> joinedRooms = new HashMap<>();
 
     /**
      * Reference to the chat view
@@ -73,6 +82,13 @@ public class ChatController {
      * @param message the message received
      */
     public void receiveMessage(GlobalMessage message) {
+        switch (message.getType()) {
+            case "room-new": {
+                NewRoomInfo newRoomInfo = (NewRoomInfo)message.getData();
+                allRooms.put(newRoomInfo.getRoomName(), new RoomEntry(newRoomInfo.getRoomName(), newRoomInfo.getUsers()));
+                break;
+            }
+        }
         chatView.onReceiveMessage(message);
     }
 
@@ -88,8 +104,8 @@ public class ChatController {
      * Get user joined rooms
      * @return user joined rooms
      */
-    public List<String> getJoinedRooms() {
-        return joinedRooms;
+    public List<RoomEntry> getJoinedRooms() {
+        return new ArrayList<>(joinedRooms.values());
     }
 
     /**
@@ -98,7 +114,7 @@ public class ChatController {
      */
     public void joinRoom(String roomName) {
         MainClient.send(new GlobalMessage("join-room", new JoinRoomRequest(roomName)));
-        joinedRooms.add(roomName);
+        joinedRooms.put(roomName, allRooms.get(roomName));
     }
 
     /**

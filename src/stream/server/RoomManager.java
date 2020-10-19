@@ -17,7 +17,7 @@ public class RoomManager {
     /**
      * List of rooms
      */
-    public static List<String> rooms = new ArrayList<>();
+    public static List<RoomEntry> rooms = new ArrayList<>();
 
     /**
      * Initialize the room manager (get the saved rooms and open the object output stream)
@@ -28,7 +28,7 @@ public class RoomManager {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("rooms.ser"));
             while (true) {
                 try {
-                    rooms.add(((RoomSerializable) ois.readObject()).getRoomName());
+                    rooms.add(new RoomEntry(((RoomSerializable) ois.readObject()).getRoomName()));
                     System.out.println("Found a room");
                 } catch (EOFException ex) {
                     break;
@@ -41,8 +41,8 @@ public class RoomManager {
         }
         try {
             oos = new ObjectOutputStream(new FileOutputStream("rooms.ser"));
-            for(String room: rooms) {
-                oos.writeObject(new RoomSerializable(room));
+            for(RoomEntry room: rooms) {
+                oos.writeObject(new RoomSerializable(room.getName()));
             }
             oos.flush();
         } catch (IOException e) {
@@ -73,8 +73,8 @@ public class RoomManager {
     public static boolean addRoom(String roomName) {
         try {
             lockRooms();
-            if (!rooms.contains(roomName)) {
-                rooms.add(roomName);
+            if (rooms.stream().filter(roomEntry -> roomEntry.getName().equals(roomName)).toArray().length == 0) {
+                rooms.add(new RoomEntry(roomName));
                 releaseRooms();
                 try {
                     oos.writeObject(new RoomSerializable(roomName));
@@ -89,5 +89,35 @@ public class RoomManager {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void joinRoom(String roomName, String userId) {
+        try {
+            lockRooms();
+            for(RoomEntry room: rooms) {
+                if (room.getName().equals(roomName)) {
+                    room.addUser(userId);
+                    break;
+                }
+            }
+            releaseRooms();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void leaveRoom(String roomName, String userId) {
+        try {
+            lockRooms();
+            for (RoomEntry room : rooms) {
+                if (room.getName().equals(roomName)) {
+                    room.removeUser(userId);
+                    break;
+                }
+            }
+            releaseRooms();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

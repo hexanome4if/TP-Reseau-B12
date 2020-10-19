@@ -193,7 +193,6 @@ public class MainServer {
      * @param socket the client to send the rooms to
      */
     public static void sendRooms(Socket socket) {
-        System.out.println("Send rooms");
         ClientData client = ClientContainer.getClient(socket);
         if (client == null) return;
         try {
@@ -201,9 +200,9 @@ public class MainServer {
             try {
                 RoomManager.lockRooms();
                 System.out.println(RoomManager.rooms.size());
-                for(String room : RoomManager.rooms) {
+                for(RoomEntry room : RoomManager.rooms) {
                     try {
-                        client.getOutputStream().writeObject(new GlobalMessage("room-new", new NewRoomInfo(room)));
+                        client.getOutputStream().writeObject(new GlobalMessage("room-new", new NewRoomInfo(room.getName(), room.getUsersFormatted())));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

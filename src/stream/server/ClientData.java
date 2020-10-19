@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +17,11 @@ public class ClientData {
      * Client socket
      */
     private final Socket socket;
+
+    /**
+     * Client unique id
+     */
+    private final String id;
 
     /**
      * Object output stream to send a message to the client
@@ -40,6 +46,7 @@ public class ClientData {
         this.socket = socket;
         this.pseudo = null;
         this.rooms = new ArrayList<>();
+        this.id = UUID.randomUUID().toString();
         try {
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException ex) {
@@ -103,6 +110,11 @@ public class ClientData {
         return rooms;
     }
 
-
-
+    /**
+     * Get user unique id
+     * @return user id
+     */
+    public String getId() {
+        return id;
+    }
 }

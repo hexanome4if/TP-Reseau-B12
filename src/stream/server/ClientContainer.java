@@ -43,6 +43,20 @@ public class ClientContainer {
     }
 
     /**
+     * Get the connected client identified by it's id
+     * @param userId user id
+     * @return the client data or null if not found
+     */
+    public static synchronized ClientData getClient(String userId) {
+        for(ClientData clientData: clients.values()) {
+            if (clientData.getId().equals(userId)) {
+                return clientData;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Remove a client from the list of connected clients
      * @param socket client socket
      */
