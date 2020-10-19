@@ -1,5 +1,7 @@
 package httpserver;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.*;
 
 public class HandleGet extends AbstractHandle {
@@ -11,14 +13,15 @@ public class HandleGet extends AbstractHandle {
     String path = request.getPath();
     File file = getResource(path, false);
 
-    if (file.exists() && !file.isDirectory())
+    if (file != null)
     {
-      String mimeType = Files.probeContentType(file.totoPath());
+
       try (Scanner scanner = new Scanner(file)){
+        String mimeType = Files.probeContentType(file.toPath());
         String body = "";
 
         while(scanner.hasNextLine()) {
-          body = body + "\r\n" + scanner.nextLine();
+          body = body + scanner.nextLine() + "\r\n";
         }
 
         scanner.close();

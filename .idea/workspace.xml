@@ -23,10 +23,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/httpserver/resources/Hokusai.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/httpserver/resources/users/fabien.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/HandleGet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/HandleGet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/httpserver/HandlePost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/HandlePost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/httpserver/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/WebServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/WebServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +63,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
-  <component name="RunManager" selected="Application.MainClient">
+  <component name="RunManager" selected="Application.WebServer">
     <configuration name="MainClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stream.client.MainClient" />
       <module name="TP-Reseau-B12" />
@@ -88,6 +92,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="WebServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="httpserver.WebServer" />
+      <module name="TP-Reseau-B12" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="httpserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -102,9 +119,11 @@
     <list>
       <item itemvalue="Application.MainServer" />
       <item itemvalue="Application.MainClient" />
+      <item itemvalue="Application.WebServer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.WebServer" />
         <item itemvalue="Application.MainClient" />
         <item itemvalue="Application.MainServer" />
       </list>
@@ -149,27 +168,31 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="653" y="355" width="656" height="394" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603018431708" />
-    <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser" timestamp="1603090680137">
+    <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser" timestamp="1603094199398">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="768" y="240" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603020642460" />
-    <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603090680137" />
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1603022295844">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603094199398" />
+    <state width="1874" height="286" key="GridCell.Tab.0.bottom" timestamp="1603094727660">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295844" />
-    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1603022295839">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1874" height="286" key="GridCell.Tab.0.bottom/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603094727660" />
+    <state width="1874" height="286" key="GridCell.Tab.0.center" timestamp="1603094727660">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
-    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1603022295839">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1874" height="286" key="GridCell.Tab.0.center/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603094727660" />
+    <state width="1874" height="286" key="GridCell.Tab.0.left" timestamp="1603094727660">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
-    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1603022295840">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1874" height="286" key="GridCell.Tab.0.left/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603094727660" />
+    <state width="1874" height="286" key="GridCell.Tab.0.right" timestamp="1603094727660">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295840" />
+    <state width="1874" height="286" key="GridCell.Tab.0.right/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603094727660" />
     <state width="1874" height="344" key="GridCell.Tab.1.bottom" timestamp="1603014871210">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -186,13 +209,14 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="344" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603014871210" />
-    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603090385544">
+    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603091935481">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603090385544" />
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1603022315423">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603091935481" />
+    <state x="2543" y="238" width="672" height="696" key="search.everywhere.popup" timestamp="1603094653532">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603022315423" />
+    <state x="2543" y="238" width="672" height="696" key="search.everywhere.popup/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603094653532" />
   </component>
 </project>

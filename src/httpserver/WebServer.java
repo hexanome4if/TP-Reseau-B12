@@ -57,21 +57,13 @@ public class WebServer {
         System.out.println("Body : ");
         if(body != null) {
           System.out.println(body);
+          request.setBody(new String(body));
         }
 
-        // Send the response
-        // Send the headers
-        out.println("HTTP/1.0 200 OK");
-        out.println("Date: TODO");
-        out.println("Content-Type: text/html");
-        out.println("Server: Bot");
-        out.println("Last-Modified: TODO");
-        out.println("Connection: Closed");
-        // this blank line signals the end of the headers
-        out.println("");
-        // Send the HTML page
-        out.println("<H1>Welcome to the Ultra Mini-WebServer</H1>");
-        out.flush();
+        // Execute request and send response
+        Response response = request.executeRequest();
+        response.execute(out);
+
         remote.close();
       } catch (Exception e) {
         System.out.println("Error: " + e);

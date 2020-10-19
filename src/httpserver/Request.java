@@ -47,8 +47,25 @@ public class Request {
     return null;
   }
 
-  public void executeRequest() {
-    // TODO
+  public String getBody() {
+    return body;
+  }
+
+  public void setBody(String body) {
+    this.body = body;
+  }
+
+  public Response executeRequest() {
+    AbstractHandle handler;
+    switch (method) {
+      case "POST":
+        handler = new HandlePost();
+        break;
+      case "GET":
+      default:
+        handler = new HandleGet();
+    }
+    return handler.execute(this);
   }
 
 }
