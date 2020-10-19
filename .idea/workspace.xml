@@ -23,11 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/httpserver/resources/Adder.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/httpserver/resources/vidmov.mov" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/httpserver/resources/vidmp4.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/httpserver/resources/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/httpserver/resources/users/fabien.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/HandleGet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/HandleGet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,10 +156,11 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602943344501">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state x="2338" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603100357520">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602943344501" />
+    <state x="2338" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603100357520" />
     <state x="653" y="355" width="656" height="394" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603018431708">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -170,26 +170,26 @@
     </state>
     <state x="768" y="240" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603020642460" />
     <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603096342134" />
-    <state width="1874" height="286" key="GridCell.Tab.0.bottom" timestamp="1603097942738">
+    <state width="1874" height="286" key="GridCell.Tab.0.bottom" timestamp="1603101472036">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295844" />
-    <state width="1874" height="286" key="GridCell.Tab.0.bottom/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603097942738" />
-    <state width="1874" height="286" key="GridCell.Tab.0.center" timestamp="1603097942738">
+    <state width="1874" height="286" key="GridCell.Tab.0.bottom/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
+    <state width="1874" height="286" key="GridCell.Tab.0.center" timestamp="1603101472036">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
-    <state width="1874" height="286" key="GridCell.Tab.0.center/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603097942738" />
-    <state width="1874" height="286" key="GridCell.Tab.0.left" timestamp="1603097942738">
+    <state width="1874" height="286" key="GridCell.Tab.0.center/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
+    <state width="1874" height="286" key="GridCell.Tab.0.left" timestamp="1603101472035">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
-    <state width="1874" height="286" key="GridCell.Tab.0.left/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603097942738" />
-    <state width="1874" height="286" key="GridCell.Tab.0.right" timestamp="1603097942738">
+    <state width="1874" height="286" key="GridCell.Tab.0.left/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472035" />
+    <state width="1874" height="286" key="GridCell.Tab.0.right" timestamp="1603101472036">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295840" />
-    <state width="1874" height="286" key="GridCell.Tab.0.right/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603097942738" />
+    <state width="1874" height="286" key="GridCell.Tab.0.right/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
     <state width="1874" height="344" key="GridCell.Tab.1.bottom" timestamp="1603014871210">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -206,10 +206,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="344" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603014871210" />
-    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603091935481">
+    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603099733726">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603091935481" />
+    <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603099733726" />
     <state x="2543" y="238" width="672" height="696" key="search.everywhere.popup" timestamp="1603096178152">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
