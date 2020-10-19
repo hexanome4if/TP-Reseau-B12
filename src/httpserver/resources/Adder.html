@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>Adding two numbers</title>
+	</head>
+
+	<body>
+		<label for="first">Enter First Number: </label><input id="first">
+		<label for="second">Enter Second Number: </label><input id="second">
+		<button onclick="add()">Add</button>
+		<label for="answer">Result is: </label><input id="answer">
+
+		<script>
+			function add() {
+				let a, b, c;
+				a = Number(document.getElementById("first").value);
+				b = Number(document.getElementById("second").value);
+				c = a + b;
+				document.getElementById("answer").value = c;
+			}
+		</script>
+
+	</body>
+
+</html>
