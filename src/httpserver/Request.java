@@ -3,6 +3,7 @@ package httpserver;
 import java.util.*;
 
 public class Request {
+
   private String path;
   private String method;
   private String httpVersion;
