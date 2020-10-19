@@ -11,6 +11,7 @@ public class Response {
   private String httpVersion;
   private Map<String,String> headers = new HashMap<>();
   private String body;
+  private byte[] byteBody = null;
 
   public Response() {
     body = "";
@@ -23,25 +24,40 @@ public class Response {
   }
 
   public void execute(OutputStream outputStream) {
-    PrintWriter out = new PrintWriter(outputStream);
-    out.println(httpVersion + " " + getStatus());
-    for(Map.Entry<String, String> header : headers.entrySet()) {
-      out.println(header.getKey() + ": " + header.getValue());
-    }
-    out.println("Content-Length: " + body.length());
-    // out.println("Last-Modified: TODO");
-
-    // this blank line signals the end of the headers
-    out.println("");
-    // Send the HTML page
-    out.println(body);
-    byte[] b = new byte[] {};
     try {
-      outputStream.write(b);
-    } catch (IOException e) {
-      // Do nothing
+      outputStream.write((httpVersion + " " + getStatus() + "\r\n").getBytes());
+      for(Map.Entry<String, String> header : headers.entrySet()) {
+        outputStream.write((header.getKey() + ": " + header.getValue() + "\r\n").getBytes());
+      }
+
+      if(byteBody != null) {
+        try {
+          outputStream.write(("Content-Length: " + byteBody.length + "\r\n").getBytes());
+          // out.println("Last-Modified: TODO");
+
+          // this blank line signals the end of the headers
+          outputStream.write(("" + "\r\n").getBytes());
+          outputStream.write(byteBody);
+        } catch (IOException e) {
+          // Do nothing
+        }
+      } else {
+        outputStream.write(("Content-Length: " + body.length() + "\r\n").getBytes());
+        // out.println("Last-Modified: TODO");
+
+        // this blank line signals the end of the headers
+        outputStream.write(("" + "\r\n").getBytes());
+
+        // Send the HTML page
+        outputStream.write(body.getBytes());
+      }
+
+      outputStream.flush();
+
+    } catch (Exception e) {
+
     }
-    out.flush();
+
   }
 
   public int getStatusCode() {
@@ -78,6 +94,14 @@ public class Response {
 
   public void setBody(String body) {
     this.body = body;
+  }
+
+  public byte[] getByteBody() {
+    return byteBody;
+  }
+
+  public void setByteBody(byte[] byteBody) {
+    this.byteBody = byteBody;
   }
 
   private String getStatus() {

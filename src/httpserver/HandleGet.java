@@ -16,17 +16,12 @@ public class HandleGet extends AbstractHandle {
     if (file != null)
     {
 
-      try (Scanner scanner = new Scanner(file)){
+      try {
         String mimeType = Files.probeContentType(file.toPath());
-        String body = "";
 
-        while(scanner.hasNextLine()) {
-          body = body + scanner.nextLine() + "\r\n";
-        }
-
-        scanner.close();
+        byte[] byteBody = Files.readAllBytes(file.toPath());
         response.setHeader("Content-Type", mimeType);
-        response.setBody(body);
+        response.setByteBody(byteBody);
         response.setStatusCode(200);
 
       } catch(Exception ex) {
