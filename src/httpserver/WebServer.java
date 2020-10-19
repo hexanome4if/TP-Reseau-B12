@@ -30,7 +30,7 @@ public class WebServer {
         // remote is now the connected socket
         System.out.println("Connection, sending data.");
         BufferedReader in = new BufferedReader(new InputStreamReader(remote.getInputStream()));
-        PrintWriter out = new PrintWriter(remote.getOutputStream());
+
 
         // read the data sent. We basically ignore it,
         // stop reading once a blank line is hit. This
@@ -62,7 +62,7 @@ public class WebServer {
 
         // Execute request and send response
         Response response = request.executeRequest();
-        response.execute(out);
+        response.execute(remote.getOutputStream());
 
         remote.close();
       } catch (Exception e) {

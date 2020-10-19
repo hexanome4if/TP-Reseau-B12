@@ -61,6 +61,12 @@ public class Request {
       case "POST":
         handler = new HandlePost();
         break;
+      case "DELETE":
+        handler = new HandleDelete();
+        break;
+      case "HEAD":
+        handler = new HandleHead();
+        break;
       case "GET":
       default:
         handler = new HandleGet();

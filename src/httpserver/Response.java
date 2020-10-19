@@ -1,5 +1,7 @@
 package httpserver;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -20,7 +22,8 @@ public class Response {
     headers.put("Content-Type", "text/plain");
   }
 
-  public void execute(PrintWriter out) {
+  public void execute(OutputStream outputStream) {
+    PrintWriter out = new PrintWriter(outputStream);
     out.println(httpVersion + " " + getStatus());
     for(Map.Entry<String, String> header : headers.entrySet()) {
       out.println(header.getKey() + ": " + header.getValue());
@@ -32,6 +35,12 @@ public class Response {
     out.println("");
     // Send the HTML page
     out.println(body);
+    byte[] b = new byte[] {};
+    try {
+      outputStream.write(b);
+    } catch (IOException e) {
+      // Do nothing
+    }
     out.flush();
   }
 

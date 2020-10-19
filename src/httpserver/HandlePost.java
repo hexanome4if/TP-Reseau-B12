@@ -16,19 +16,16 @@ public class HandlePost extends AbstractHandle {
         }
 
         if (!resource.canWrite()) {
-            System.out.println("Cant read");
             response.setStatusCode(400);
             return response;
         }
 
         if (!request.getHeader("Content-Type").equals("text/plain")) {
-            System.out.println("Wrong type");
             response.setStatusCode(400);
             return response;
         }
 
         if (request.getBody() == null || request.getBody().equals("")) {
-            System.out.println("No body");
             response.setStatusCode(400);
             return response;
         }
