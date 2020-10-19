@@ -4,6 +4,7 @@ import stream.client.MainClient;
 import stream.client.view.ChatView;
 import stream.client.view.PseudoView;
 import stream.core.GlobalMessage;
+import stream.core.requests.ConnectRequest;
 
 public class PseudoController {
 
@@ -25,7 +26,7 @@ public class PseudoController {
      * @param pseudo user pseudo
      */
     public void sendPseudo(String pseudo) {
-        MainClient.send(new GlobalMessage(pseudo, "connect", null, null));
+        MainClient.send(new GlobalMessage("connect", new ConnectRequest(pseudo)));
         ChatView chatView = new ChatView();
         chatView.show(); // Open the chat view
         chatView.renderRoomManagementPanel();

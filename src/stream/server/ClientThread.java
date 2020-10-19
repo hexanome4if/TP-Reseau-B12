@@ -1,6 +1,8 @@
 package stream.server;
 
 import stream.core.GlobalMessage;
+import stream.core.infos.*;
+import stream.core.requests.*;
 
 import java.io.*;
 import java.net.*;
@@ -70,16 +72,17 @@ public class ClientThread extends Thread {
      * @param message the message sent by the client
      */
     private void handleMessage(GlobalMessage message) throws IOException {
+        System.out.println("Received message: " + message.getType());
         switch (message.getType()) {
             case "join-room": {
-                String roomName = (String)message.getData();
+                JoinRoomRequest joinRoomRequest = (JoinRoomRequest)message.getData();
                 ClientData clientData = ClientContainer.getClient(clientSocket);
 
                 if (clientData != null) {
                     List<String> rooms = clientData.getJoinedRooms();
-                    if (!rooms.contains(roomName)) {
-                        clientData.joinRoom(roomName);
-                        GlobalMessage computedMessage = new GlobalMessage(pseudo, "join-room", null, roomName);
+                    if (!rooms.contains(joinRoomRequest.getRoomName())) {
+                        clientData.joinRoom(joinRoomRequest.getRoomName());
+                        GlobalMessage computedMessage = new GlobalMessage("room-joined", new UserJoinedRoomInfo(pseudo, joinRoomRequest.getRoomName()));
                         computedMessage.setDate();
                         MainServer.broadcastMessage(computedMessage, clientSocket);
                         MainServer.saveInHistory(computedMessage);
@@ -88,14 +91,14 @@ public class ClientThread extends Thread {
                 break;
             }
             case "leave-room": {
-                String roomName = (String)message.getData();
+                LeaveRoomRequest leaveRoomRequest = (LeaveRoomRequest)message.getData();
                 ClientData clientData = ClientContainer.getClient(clientSocket);
 
                 if (clientData != null) {
                     List<String> rooms = clientData.getJoinedRooms();
-                    if (rooms.contains(roomName)) {
-                        clientData.leaveRoom(roomName);
-                        GlobalMessage computedMessage = new GlobalMessage(pseudo, "leave-room", null, roomName);
+                    if (rooms.contains(leaveRoomRequest.getRoomName())) {
+                        clientData.leaveRoom(leaveRoomRequest.getRoomName());
+                        GlobalMessage computedMessage = new GlobalMessage("room-left", new UserLeftRoomInfo(pseudo, leaveRoomRequest.getRoomName()));
                         computedMessage.setDate();
                         MainServer.broadcastMessage(computedMessage, clientSocket);
                         MainServer.saveInHistory(computedMessage);
@@ -104,37 +107,46 @@ public class ClientThread extends Thread {
                 break;
             }
             case "create-room": {
-                if (RoomManager.addRoom((String) message.getData())) {
-                    GlobalMessage computedMessage = new GlobalMessage("room", message.getData(), null);
+                CreateRoomRequest createRoomRequest = (CreateRoomRequest)message.getData();
+                if (RoomManager.addRoom(createRoomRequest.getRoomName())) {
+                    GlobalMessage computedMessage = new GlobalMessage("room-new", new NewRoomInfo(createRoomRequest.getRoomName()));
                     MainServer.broadcastMessage(computedMessage, null);
                 }
 
                 break;
             }
-            case "message-txt": {
-                GlobalMessage computedMessage = new GlobalMessage(pseudo,"message-txt",message.getData(), message.getRoomName());
-                computedMessage.setDate();
-                MainServer.broadcastMessage(computedMessage, clientSocket);
-                MainServer.saveInHistory(computedMessage);
+            case "message": {
+                MessageRequest messageRequest = (MessageRequest)message.getData();
+                switch(messageRequest.getType()) {
+                    case "text": {
+                        TextMessageRequest textMessageRequest = (TextMessageRequest)messageRequest.getData();
+                        GlobalMessage computedMessage = new GlobalMessage("message", new MessageInfo("text", new TextMessageInfo(textMessageRequest.getMessage()), pseudo, messageRequest.getRoomName()));
+                        computedMessage.setDate();
+                        MainServer.broadcastMessage(computedMessage, clientSocket);
+                        MainServer.saveInHistory(computedMessage);
+                        break;
+                    }
+                    case "file": {
+                        FileMessageRequest fileMessageRequest = (FileMessageRequest)messageRequest.getData();
+                        GlobalMessage computedMessage = new GlobalMessage("message", new MessageInfo("file", new FileMessageInfo(fileMessageRequest.getFileName(), fileMessageRequest.getFileData()), pseudo, messageRequest.getRoomName()));
+                        computedMessage.setDate();
+                        MainServer.broadcastMessage(computedMessage, clientSocket);
+                        MainServer.saveInHistory(computedMessage);
+                        break;
+                    }
+                }
                 break;
-            }
-            case "message-file": {
-                GlobalMessage computedMessage = new GlobalMessage(pseudo, "message-file", message.getData(), message.getRoomName());
-                computedMessage.setDate();
-                MainServer.broadcastMessage(computedMessage, clientSocket);
-                MainServer.saveInHistory(computedMessage);
             }
             case "disconnect": {
                 disconnect();
                 break;
             }
             case "connect": {
-                System.out.println("Connect");
                 ClientData clientData = ClientContainer.getClient(clientSocket);
                 if (clientData != null) {
-                    System.out.println("Ok");
-                    clientData.setPseudo(message.getPseudo());
-                    pseudo = message.getPseudo();
+                    ConnectRequest connectRequest = (ConnectRequest)message.getData();
+                    clientData.setPseudo(connectRequest.getPseudo());
+                    pseudo = connectRequest.getPseudo();
                     MainServer.sendHistory(clientSocket);
                     MainServer.sendRooms(clientSocket);
                 }
@@ -152,7 +164,7 @@ public class ClientThread extends Thread {
         if (clientData != null) {
             // Send a leave message to every joined room
             for(String room: clientData.getJoinedRooms()) {
-                GlobalMessage computedMessage = new GlobalMessage(pseudo, "leave-room", null, room);
+                GlobalMessage computedMessage = new GlobalMessage("room-left", new UserLeftRoomInfo(pseudo, room));
                 computedMessage.setDate();
                 MainServer.broadcastMessage(computedMessage, clientSocket);
                 MainServer.saveInHistory(computedMessage);

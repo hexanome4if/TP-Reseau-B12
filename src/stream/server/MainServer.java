@@ -1,6 +1,7 @@
 package stream.server;
 
 import stream.core.GlobalMessage;
+import stream.core.infos.NewRoomInfo;
 
 import java.io.*;
 import java.net.*;
@@ -202,7 +203,7 @@ public class MainServer {
                 System.out.println(RoomManager.rooms.size());
                 for(String room : RoomManager.rooms) {
                     try {
-                        client.getOutputStream().writeObject(new GlobalMessage("room", room, null));
+                        client.getOutputStream().writeObject(new GlobalMessage("room-new", new NewRoomInfo(room)));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
