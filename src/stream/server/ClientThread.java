@@ -1,7 +1,6 @@
 package stream.server;
 
 import stream.core.GlobalMessage;
-import sun.applet.Main;
 
 import java.io.*;
 import java.net.*;
