@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Request {
 
-  private String path;
-  private String method;
-  private String httpVersion;
-  private Map<String,String> headers = new HashMap<>();
+  private final String path;
+  private final String method;
+  private final String httpVersion;
+  private final Map<String,String> headers = new HashMap<>();
   private String body;
 
   public Request(List<String> headers) {
@@ -66,6 +66,9 @@ public class Request {
         break;
       case "HEAD":
         handler = new HandleHead();
+        break;
+      case "PUT":
+        handler = new HandlePut();
         break;
       case "GET":
       default:
