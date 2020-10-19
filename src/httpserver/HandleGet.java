@@ -13,22 +13,21 @@ public class HandleGet extends AbstractHandle {
 
     if (file.exists() && !file.isDirectory())
     {
-      if(request.getHeader("Content-Type") == "text/html") {
-        try (Scanner scanner = new Scanner(file)){
-          String body = "";
+      String mimeType = Files.probeContentType(file.totoPath());
+      try (Scanner scanner = new Scanner(file)){
+        String body = "";
 
-          while(scanner.hasNextLine()) {
-            body = body + "\r\n" + scanner.nextLine();
-          }
-
-          scanner.close();
-          response.setBody(body);
-          response.setStatusCode(200);
-
-        } catch(Exception ex) {
-          response.setStatusCode(500);
+        while(scanner.hasNextLine()) {
+          body = body + "\r\n" + scanner.nextLine();
         }
 
+        scanner.close();
+        response.setHeader("Content-Type", mimeType);
+        response.setBody(body);
+        response.setStatusCode(200);
+
+      } catch(Exception ex) {
+        response.setStatusCode(500);
       }
     } else {
       // return 404
