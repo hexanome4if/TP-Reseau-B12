@@ -44,8 +44,10 @@ public abstract class AbstractHandle {
     }
     if (!executableCommand.equals("")) {
       executableCommand += " " + request.getMethod() + " " + request.getQueryString() + " \"" + request.getBody() + "\"";
+      System.out.println(executableCommand);
       try {
         Process child = Runtime.getRuntime().exec(executableCommand);
+        child.waitFor();
         InputStream in = child.getInputStream();
 
         List<Byte> result = new ArrayList<>();
@@ -67,7 +69,7 @@ public abstract class AbstractHandle {
         }
         response.setByteBody(finalResult);
         return response;
-      } catch (IOException e) {
+      } catch (IOException | InterruptedException e) {
         e.printStackTrace();
       }
     }
