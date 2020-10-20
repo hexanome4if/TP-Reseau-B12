@@ -1,6 +1,7 @@
 package httpserver;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,6 @@ public class ClientThread extends Thread {
             byte[] byteBody = null;
             if (contentLength != null) {
                 int intContentLength = Integer.parseInt(contentLength);
-                byteBody = new byte[intContentLength];
                 byteBody = inputStream.readNBytes(intContentLength);
             }
 

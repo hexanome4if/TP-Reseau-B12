@@ -1,6 +1,11 @@
 package httpserver;
 
-import java.util.*;
+import httpserver.middlewares.AdminMiddleware;
+import httpserver.middlewares.ExecMiddleware;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Request {
 
@@ -84,6 +89,16 @@ public class Request {
   }
 
   public Response executeRequest() {
+    Response response;
+
+    response = new ExecMiddleware().execute(this);
+    if (response != null) return response;
+
+    response = new AdminMiddleware().execute(this);
+    if (response != null) return response;
+
+
+
     AbstractHandle handler;
     switch (method) {
       case "POST":

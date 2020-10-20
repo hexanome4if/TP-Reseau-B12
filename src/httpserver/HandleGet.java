@@ -14,8 +14,6 @@ public class HandleGet extends AbstractHandle {
 
     if (file != null)
     {
-      Response execResponse = tryToExecute(file, request);
-      if (execResponse != null) return execResponse;
       try {
         String mimeType = Files.probeContentType(file.toPath());
 

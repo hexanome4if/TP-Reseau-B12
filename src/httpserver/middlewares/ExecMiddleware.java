@@ -1,5 +1,6 @@
 package httpserver.middlewares;
 
+import httpserver.AbstractHandle;
 import httpserver.Request;
 import httpserver.Response;
 
@@ -9,11 +10,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExecMiddleware extends AbstractMiddleware {
+public class ExecMiddleware extends AbstractHandle {
 
     @Override
-    public Response handle(Request request) {
-        File resource =
+    public Response execute(Request request) {
+        File resource = getResource(request.getPath(), false);
+
+        if (resource == null) return null;
 
         String[] splitResourceName = resource.getName().split("\\.");
         String executableCommand = "";
