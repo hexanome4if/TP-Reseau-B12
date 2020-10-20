@@ -1,8 +1,6 @@
 package httpserver;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class ClientThread extends Thread {
         try {
             // remote is now the connected socket
             System.out.println("Connection, sending data.");
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            InputStream inputStream = socket.getInputStream();
 
 
             // read the data sent. We basically ignore it,
@@ -29,11 +27,17 @@ public class ClientThread extends Thread {
             // headers.
 
             String str = ".";
+            byte[] b;
             List<String> headers = new ArrayList<>();
 
             // Read headers
             while (str != null && !str.equals("")) {
-                str = in.readLine();
+                str="";
+                do {
+                  b = inputStream.readNBytes(1);
+                  str += new String(b);
+                } while (str.length() < 2 || str.charAt(str.length()-2) != '\r' || str.charAt(str.length()-1) != '\n' );
+                str = str.substring(0, str.length()-2);
                 headers.add(str);
                 System.out.println(str);
             }
@@ -44,17 +48,17 @@ public class ClientThread extends Thread {
 
             Request request = new Request(headers);
             String contentLength = request.getHeader("Content-Length");
-            char[] body = null;
+            byte[] byteBody = null;
             if (contentLength != null) {
                 int intContentLength = Integer.parseInt(contentLength);
-                body = new char[intContentLength];
-                in.read(body, 0, intContentLength);
+                byteBody = new byte[intContentLength];
+                byteBody = inputStream.readNBytes(intContentLength);
             }
 
             System.out.println("Body : ");
-            if (body != null) {
-                System.out.println(body);
-                request.setBody(new String(body));
+            if (byteBody != null) {
+                request.setBody(new String(byteBody));
+                request.setByteBody(byteBody);
             }
 
             // Execute request and send response

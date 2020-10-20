@@ -9,6 +9,7 @@ public class Request {
   private final String httpVersion;
   private final Map<String,String> headers = new HashMap<>();
   private String body;
+  private byte[] byteBody;
   private Map<String,String> queryParams = new HashMap<>();
   private String queryString;
 
@@ -68,6 +69,14 @@ public class Request {
 
   public void setBody(String body) {
     this.body = body;
+  }
+
+  public byte[] getByteBody() {
+    return byteBody;
+  }
+
+  public void setByteBody(byte[] byteBody) {
+    this.byteBody = byteBody;
   }
 
   public String getQueryString() {
