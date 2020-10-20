@@ -43,7 +43,7 @@ public abstract class AbstractHandle {
         break;
     }
     if (!executableCommand.equals("")) {
-      executableCommand += " " + request.getMethod();
+      executableCommand += " " + request.getMethod() + " " + request.getQueryString() + " \"" + request.getBody() + "\"";
       try {
         Process child = Runtime.getRuntime().exec(executableCommand);
         InputStream in = child.getInputStream();
