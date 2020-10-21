@@ -1,4 +1,4 @@
-/***
+/**
  * MainMulticast
  * Multicast UDP client
  * Date: 17/10/2020
@@ -33,7 +33,7 @@ public class MainMulticast {
   private static String multicastIPAdress = "228.5.6.7";
 
   /**
-  *  main method
+  *  main method,
   *  Connection to the multicast group
   * @throws IOException
   **/

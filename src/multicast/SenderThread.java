@@ -1,4 +1,4 @@
-/***
+/**
  * SenderThread
  * Sender thread for a multicast UDP client
  * Date: 17/10/2020

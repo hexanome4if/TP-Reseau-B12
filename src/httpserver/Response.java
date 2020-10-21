@@ -1,3 +1,10 @@
+/**
+ * MainMulticast
+ * Multicast UDP client
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
+ */
+
 package httpserver;
 
 import java.io.IOException;
@@ -8,12 +15,30 @@ import java.util.Map;
 
 public class Response {
 
+  /**
+  * status code of the response
+  **/
   private int statusCode;
+  /**
+  * HTTP version of the response
+  **/
   private String httpVersion;
+  /**
+  * map of headers of the response
+  **/
   private Map<String,String> headers = new HashMap<>();
+  /**
+  * body (type String) of the response
+  **/
   private String body;
+  /**
+  * body (type byte[]) of the response
+  **/
   private byte[] byteBody = null;
 
+  /**
+  * Default constructor of the response
+  **/
   public Response() {
     body = "";
     statusCode = 200;
@@ -24,6 +49,10 @@ public class Response {
     headers.put("Content-Type", "text/plain");
   }
 
+  /**
+  * Execute the response, it sends data to the client
+  * @param outputStream outputStream in which data will be sent
+  **/
   public void execute(OutputStream outputStream) {
     try {
       outputStream.write((httpVersion + " " + getStatus() + "\r\n").getBytes());
@@ -61,50 +90,99 @@ public class Response {
 
   }
 
+  /**
+  * return statusCode
+  * @return statusCode
+  **/
   public int getStatusCode() {
     return statusCode;
   }
 
+  /**
+  * set statusCode
+  * @param statusCode
+  **/
   public void setStatusCode(int statusCode) {
     this.statusCode = statusCode;
   }
 
+  /**
+  * return httpVersion
+  * @return httpVersion
+  **/
   public String getHttpVersion() {
     return httpVersion;
   }
 
+  /**
+  * set httpVersion
+  * @param httpVersion
+  **/
   public void setHttpVersion(String httpVersion) {
     this.httpVersion = httpVersion;
   }
 
+  /**
+  * return headers
+  * @return headers
+  **/
   public Map<String, String> getHeaders() {
     return headers;
   }
 
+  /**
+  * set one header in headers
+  * @param headerName key
+  * @param headerContent value
+  **/
   public void setHeader(String headerName, String headerContent) {
     this.headers.put(headerName, headerContent);
   }
 
+  /**
+  * set headers
+  * @param headers
+  **/
   public void setHeaders(Map<String, String> headers) {
     this.headers = headers;
   }
 
+  /**
+  * return body
+  * @return body
+  **/
   public String getBody() {
     return body;
   }
 
+  /**
+  * set body
+  * @param body
+  **/
   public void setBody(String body) {
     this.body = body;
   }
 
+  /**
+  * return byteBody
+  * @return byteBody
+  **/
   public byte[] getByteBody() {
     return byteBody;
   }
 
+  /**
+  * set byteBody
+  * @param byteBody
+  **/
   public void setByteBody(byte[] byteBody) {
     this.byteBody = byteBody;
   }
 
+  /**
+  * return status String according to statusCode
+  * @return statusCode
+  **/
   private String getStatus() {
     switch (statusCode) {
       case 200:

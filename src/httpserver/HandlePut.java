@@ -1,9 +1,20 @@
+/**
+ * HandlePut
+ * Execute a PUT request
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
+ */
+
 package httpserver;
 
 import java.io.*;
 
 public class HandlePut extends AbstractHandle {
 
+    /**
+    * Execute the PUT request
+    * @param request request received
+    **/
     @Override
     public Response execute(Request request) {
         File resource = getResource(request.getPath(), true);
@@ -24,8 +35,6 @@ public class HandlePut extends AbstractHandle {
             response.setStatusCode(400);
             return response;
         }
-
-        System.out.println(request.getHeader("Content-Type"));
 
         if(request.getHeader("Content-Type").contains("text/")) {
 
@@ -62,9 +71,8 @@ public class HandlePut extends AbstractHandle {
           } catch (IOException e) {
               response.setStatusCode(500);
           }
-          
-        }
 
+        }
 
         return response;
     }

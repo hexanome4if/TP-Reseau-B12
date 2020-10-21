@@ -1,3 +1,10 @@
+/**
+ * SenderThread
+ * Sender thread for a multicast UDP client
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
+ */
+
 package httpserver;
 
 import java.io.IOException;
@@ -8,12 +15,22 @@ import java.util.List;
 
 public class ClientThread extends Thread {
 
+    /**
+    * socket of the server
+    **/
     private final Socket socket;
 
+    /**
+    * Constructor the client thread
+    * @param socket socket of the server
+    **/
     public ClientThread(Socket socket) {
         this.socket = socket;
     }
 
+    /**
+    * Run the thread, it will read data in input and parse it in a Request object then send a response
+    **/
     @Override
     public void run() {
         try {
