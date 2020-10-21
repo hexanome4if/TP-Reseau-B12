@@ -56,7 +56,7 @@ public class Response {
       outputStream.flush();
 
     } catch (Exception e) {
-
+      // Do nothing
     }
 
   }

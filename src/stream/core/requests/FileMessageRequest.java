@@ -23,10 +23,18 @@ public class FileMessageRequest implements Serializable {
         this.fileData = fileData;
     }
 
+    /**
+     * Get file content
+     * @return file content
+     */
     public byte[] getFileData() {
         return fileData;
     }
 
+    /**
+     * Get file name
+     * @return file name
+     */
     public String getFileName() {
         return fileName;
     }

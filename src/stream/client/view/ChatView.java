@@ -67,18 +67,12 @@ public class ChatView {
      * @param message the message received
      */
     public void onReceiveMessage(GlobalMessage message) {
-        System.out.println("Received message: " + message.getType());
         // Important to be thread safe
         SwingUtilities.invokeLater(() -> {
-            switch (message.getType()) {
-                case "room-new": {
-                    roomManagementPanel.onGetRoom(message);
-                    break;
-                }
-                default: {
-                    chatPanel.onReceiveMessage(message);
-                    break;
-                }
+            if ("room-new".equals(message.getType())) {
+                roomManagementPanel.onGetRoom(message);
+            } else {
+                chatPanel.onReceiveMessage(message);
             }
         });
     }

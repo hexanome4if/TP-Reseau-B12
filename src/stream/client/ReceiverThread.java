@@ -84,7 +84,7 @@ public class ReceiverThread extends Thread {
 
     /**
      * Method used when the client disconnect from the server to clear stream and stop infinite loop
-     * @throws IOException
+     * @throws IOException if an error occurred while closing the socket input stream
      */
     public void disconnect() throws IOException {
         run = false;

@@ -12,6 +12,11 @@ import java.util.List;
 
 public class ExecMiddleware extends AbstractHandle {
 
+    /**
+     * Check if the resource is an executable file and execute it if it's possible
+     * @param request the http request
+     * @return null if the resource is not an executable file or if the execution failed a response if the file has been executed
+     */
     @Override
     public Response execute(Request request) {
         File resource = getResource(request.getPath(), false);

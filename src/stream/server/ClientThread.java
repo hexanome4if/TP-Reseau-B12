@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author polo
+ * @author Fabien & Paul
  */
 public class ClientThread extends Thread {
     /**
@@ -59,11 +59,7 @@ public class ClientThread extends Thread {
             }
 
         } catch (EOFException ex) {
-          try {
             disconnect();
-          } catch (IOException e) {
-              Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
-          }
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,7 +69,7 @@ public class ClientThread extends Thread {
      * Handle and treat a new message from the client
      * @param message the message sent by the client
      */
-    private void handleMessage(GlobalMessage message) throws IOException {
+    private void handleMessage(GlobalMessage message) {
         System.out.println("Received message: " + message.getType());
         switch (message.getType()) {
             case "join-room": {
@@ -160,7 +156,7 @@ public class ClientThread extends Thread {
     /**
      * Method to handle client disconnection (stopping thread, remove client from connected clients list, send disconnection message to everyone)
      */
-    private void disconnect() throws IOException {
+    private void disconnect() {
         stopLoop = true;
         ClientData clientData = ClientContainer.getClient(clientSocket);
         if (clientData != null) {

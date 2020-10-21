@@ -17,6 +17,10 @@ public class ConnectRequest implements Serializable {
         this.pseudo = pseudo;
     }
 
+    /**
+     * Get user pseudo
+     * @return user pseudo
+     */
     public String getPseudo() {
         return pseudo;
     }

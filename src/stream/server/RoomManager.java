@@ -17,7 +17,7 @@ public class RoomManager {
     /**
      * List of rooms
      */
-    public static List<String> rooms = new ArrayList<>();
+    public static final List<String> rooms = new ArrayList<>();
 
     /**
      * Initialize the room manager (get the saved rooms and open the object output stream)
@@ -52,7 +52,7 @@ public class RoomManager {
 
     /**
      * Lock rooms when we need to use the room list
-     * @throws InterruptedException
+     * @throws InterruptedException if an error occurred while locking the semaphore
      */
     public static void lockRooms() throws InterruptedException {
         lock.acquire();

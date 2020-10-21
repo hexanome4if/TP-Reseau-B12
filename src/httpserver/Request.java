@@ -15,7 +15,7 @@ public class Request {
   private final Map<String,String> headers = new HashMap<>();
   private String body;
   private byte[] byteBody;
-  private Map<String,String> queryParams = new HashMap<>();
+  private final Map<String,String> queryParams = new HashMap<>();
   private String queryString;
 
   public Request(List<String> headers) {
@@ -86,6 +86,13 @@ public class Request {
 
   public String getQueryString() {
     return queryString;
+  }
+
+  public String getQueryParam(String name) {
+    if (queryParams.containsKey(name)) {
+      return queryParams.get(name);
+    }
+    return null;
   }
 
   public Response executeRequest() {

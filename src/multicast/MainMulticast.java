@@ -15,36 +15,37 @@ import java.net.MulticastSocket;
 
 public class MainMulticast {
 
-  /**
-  * multicast socket of the client
-  **/
-  private static MulticastSocket multicastSocket = null;
-  /**
-  * adress group of the client
-  **/
-  private static InetAddress groupAddr = null;
-  /**
-  * port group of the client
-  **/
-  private static int groupPort = 9001;
-  /**
-  * IP adress for the multicast
-  **/
-  private static String multicastIPAdress = "228.5.6.7";
+    /**
+     * multicast socket of the client
+     **/
+    private static MulticastSocket multicastSocket = null;
+    /**
+     * address group of the client
+     **/
+    private static InetAddress groupAddr = null;
+    /**
+     * port group of the client
+     **/
+    private static final int groupPort = 9001;
+    /**
+     * IP address for the multicast
+     **/
+    private static final String multicastIPAddress = "228.5.6.7";
 
-  /**
-  *  main method
-  *  Connection to the multicast group
-  * @throws IOException
-  **/
+    /**
+     * main method
+     * Connection to the multicast group
+     *
+     * @throws IOException if an error occurred while connecting
+     **/
     public static void main(String[] args) throws IOException {
 
-        groupAddr = InetAddress.getByName(multicastIPAdress);
+        groupAddr = InetAddress.getByName(multicastIPAddress);
 
         connectToGroup();
 
-        ReceiverThread rt = null;
-        SenderThread st = null;
+        ReceiverThread rt;
+        SenderThread st;
 
         rt = new ReceiverThread(multicastSocket);
         rt.start();
@@ -58,9 +59,9 @@ public class MainMulticast {
     }
 
     /**
-    * Connect the client to the group
-    **/
-    public static void connectToGroup()  {
+     * Connect the client to the group
+     **/
+    public static void connectToGroup() {
         try {
             // creation socket ==> connexion
             multicastSocket = new MulticastSocket(groupPort);
@@ -72,9 +73,10 @@ public class MainMulticast {
     }
 
     /**
-    * Disconnect the client to the group
-    **/
+     * Disconnect the client to the group
+     * @throws IOException if an error occurred while leaving the multicast group
+     **/
     public static void disconnect() throws IOException {
-      multicastSocket.leaveGroup(groupAddr);
+        multicastSocket.leaveGroup(groupAddr);
     }
 }
