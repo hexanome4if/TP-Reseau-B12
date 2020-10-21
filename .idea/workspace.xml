@@ -26,7 +26,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="" />
+    <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,22 +112,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-<<<<<<< HEAD
-=======
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/TP-Reseau-B12/doc/index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
->>>>>>> f4007f3f8b8a5d48b29613d1320ef2ac63fa0d61
     <list>
       <item itemvalue="Application.MainServer" />
       <item itemvalue="Application.MainClient" />
       <item itemvalue="Application.WebServer" />
-      <item itemvalue="JavaScript Debug.index.html" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.WebServer" />
-        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Application.MainClient" />
         <item itemvalue="Application.MainServer" />
       </list>
@@ -185,28 +180,6 @@
     </state>
     <state x="768" y="240" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603209328841" />
     <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603096342134" />
-<<<<<<< HEAD
-    <state width="1874" height="286" key="GridCell.Tab.0.bottom" timestamp="1603101836982">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295844" />
-    <state width="1874" height="286" key="GridCell.Tab.0.bottom/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101836982" />
-    <state width="1874" height="286" key="GridCell.Tab.0.center" timestamp="1603101836982">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
-    <state width="1874" height="286" key="GridCell.Tab.0.center/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101836982" />
-    <state width="1874" height="286" key="GridCell.Tab.0.left" timestamp="1603101836982">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295839" />
-    <state width="1874" height="286" key="GridCell.Tab.0.left/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101836982" />
-    <state width="1874" height="286" key="GridCell.Tab.0.right" timestamp="1603101836982">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603022295840" />
-    <state width="1874" height="286" key="GridCell.Tab.0.right/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101836982" />
-=======
     <state x="690" y="265" width="530" height="575" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603202235652">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -235,7 +208,6 @@
     </state>
     <state width="1874" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603210171330" />
     <state width="1874" height="286" key="GridCell.Tab.0.right/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
->>>>>>> f4007f3f8b8a5d48b29613d1320ef2ac63fa0d61
     <state width="1874" height="344" key="GridCell.Tab.1.bottom" timestamp="1603014871210">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
