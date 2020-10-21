@@ -29,14 +29,26 @@ public class MessageRequest implements Serializable {
         this.data = data;
     }
 
+    /**
+     * Get room name
+     * @return room name
+     */
     public String getRoomName() {
         return roomName;
     }
 
+    /**
+     * Get message data
+     * @return message data
+     */
     public Object getData() {
         return data;
     }
 
+    /**
+     * Get message type (file or text)
+     * @return message type
+     */
     public String getType() {
         return type;
     }

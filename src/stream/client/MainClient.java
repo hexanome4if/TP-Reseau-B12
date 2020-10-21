@@ -122,7 +122,6 @@ public class MainClient {
 
     /**
      * Disconnect client from server
-     * @throws IOException
      */
     public static void disconnect() {
         try {

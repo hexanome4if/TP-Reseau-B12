@@ -40,11 +40,11 @@ public class WebServer {
       }
     }
   }
-
+  
   /**
   * Laucnh the program (create the WebServer and start it)
   **/
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     WebServer ws = new WebServer();
     ws.start();
   }

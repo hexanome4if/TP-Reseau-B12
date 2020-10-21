@@ -17,6 +17,10 @@ public class TextMessageInfo implements Serializable {
         this.content = content;
     }
 
+    /**
+     * Get message text content
+     * @return text content
+     */
     public String getContent() {
         return content;
     }

@@ -44,19 +44,19 @@ public class ClientThread extends Thread {
             // blank line signals the end of the client HTTP
             // headers.
 
-            String str = ".";
+            StringBuilder str = new StringBuilder(".");
             byte[] b;
             List<String> headers = new ArrayList<>();
 
             // Read headers
-            while (str != null && !str.equals("")) {
-                str="";
+            while (!str.toString().equals("")) {
+                str = new StringBuilder();
                 do {
                   b = inputStream.readNBytes(1);
-                  str += new String(b);
+                  str.append(new String(b));
                 } while (str.length() < 2 || str.charAt(str.length()-2) != '\r' || str.charAt(str.length()-1) != '\n' );
-                str = str.substring(0, str.length()-2);
-                headers.add(str);
+                str = new StringBuilder(str.substring(0, str.length() - 2));
+                headers.add(str.toString());
                 System.out.println(str);
             }
             if (headers.size() == 0 || headers.get(0) == null) {

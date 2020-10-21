@@ -28,7 +28,35 @@
   <component name="ChangeListManager">
     <list default="true" id="62f7ec79-7713-4c7c-a64e-f63d8c1b2a84" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history.ser" beforeDir="false" afterPath="$PROJECT_DIR$/history.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rooms.ser" beforeDir="false" afterPath="$PROJECT_DIR$/rooms.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/AbstractHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/WebServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/WebServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/middlewares/AdminMiddleware.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/middlewares/AdminMiddleware.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/middlewares/ExecMiddleware.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/middlewares/ExecMiddleware.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/httpserver/resources/admin/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpserver/resources/admin/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/multicast/MainMulticast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/multicast/MainMulticast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/multicast/ReceiverThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/multicast/ReceiverThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/multicast/SenderThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/multicast/SenderThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/MainClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/ReceiverThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/ReceiverThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/SenderThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/SenderThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/ChatView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/client/view/RoomManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/client/view/RoomManagementPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/core/infos/TextMessageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/infos/TextMessageInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/core/requests/ConnectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/requests/ConnectRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/core/requests/FileMessageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/requests/FileMessageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/core/requests/MessageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/requests/MessageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/core/requests/TextMessageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/core/requests/TextMessageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/ClientContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/MainServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stream/server/RoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stream/server/RoomManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +92,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -78,6 +107,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="stream.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainMulticast" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="multicast.MainMulticast" />
+      <module name="TP-Reseau-B12" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="multicast.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,14 +154,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.MainServer" />
       <item itemvalue="Application.MainClient" />
       <item itemvalue="Application.WebServer" />
+      <item itemvalue="Application.MainMulticast" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.WebServer" />
+        <item itemvalue="Application.MainMulticast" />
         <item itemvalue="Application.MainClient" />
         <item itemvalue="Application.MainServer" />
       </list>
@@ -166,11 +223,12 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="443" y="131" width="1024" height="843" key="#Project_Structure/0.27.1920.1053@0.27.1920.1053" timestamp="1603209697328" />
-    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603201751686">
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603265215410">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1603201751686" />
     <state x="2338" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603100357520" />
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603265215410" />
     <state x="311" y="355" width="1609" height="394" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603210008730">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -180,34 +238,39 @@
     </state>
     <state x="768" y="240" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603209328841" />
     <state x="2688" y="218" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603096342134" />
-    <state x="690" y="265" width="530" height="575" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603202235652">
+    <state x="690" y="265" width="530" height="575" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603263370012">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="690" y="265" width="530" height="575" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.27.1920.1053@0.27.1920.1053" timestamp="1603202235652" />
+    <state x="690" y="265" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603263370012" />
     <state x="738" y="310" width="424" height="482" key="FileChooserDialogImpl" timestamp="1603205061298">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="738" y="310" width="424" height="482" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1603205061298" />
-    <state width="1874" height="277" key="GridCell.Tab.0.bottom" timestamp="1603210171331">
+    <state width="1874" height="285" key="GridCell.Tab.0.bottom" timestamp="1603266011363">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603210171331" />
     <state width="1874" height="286" key="GridCell.Tab.0.bottom/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
-    <state width="1874" height="277" key="GridCell.Tab.0.center" timestamp="1603210171330">
+    <state width="1874" height="285" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603266011363" />
+    <state width="1874" height="285" key="GridCell.Tab.0.center" timestamp="1603266011362">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603210171330" />
     <state width="1874" height="286" key="GridCell.Tab.0.center/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
-    <state width="1874" height="277" key="GridCell.Tab.0.left" timestamp="1603210171329">
+    <state width="1874" height="285" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603266011362" />
+    <state width="1874" height="285" key="GridCell.Tab.0.left" timestamp="1603266011362">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603210171329" />
     <state width="1874" height="286" key="GridCell.Tab.0.left/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472035" />
-    <state width="1874" height="277" key="GridCell.Tab.0.right" timestamp="1603210171331">
+    <state width="1874" height="285" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603266011362" />
+    <state width="1874" height="285" key="GridCell.Tab.0.right" timestamp="1603266011363">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1874" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603210171330" />
     <state width="1874" height="286" key="GridCell.Tab.0.right/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603101472036" />
+    <state width="1874" height="285" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603266011363" />
     <state width="1874" height="344" key="GridCell.Tab.1.bottom" timestamp="1603014871210">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -228,14 +291,19 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2661" y="455" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603099733726" />
+    <state x="651" y="279" width="618" height="522" key="find.popup" timestamp="1603262406928">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="651" y="279" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603262406928" />
     <state x="269" y="155" width="1372" height="794" key="new project wizard" timestamp="1603205075241">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="269" y="155" width="1372" height="794" key="new project wizard/0.27.1920.1053@0.27.1920.1053" timestamp="1603205075241" />
-    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1603209472046">
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1603265736266">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603209472046" />
     <state x="2543" y="238" width="672" height="696" key="search.everywhere.popup/0.37.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1603096178152" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1603265736266" />
   </component>
 </project>

@@ -59,7 +59,7 @@ public class ChatController {
     /**
      * Send a message containing a file
      * @param file the file to send
-     * @throws IOException
+     * @throws IOException if we cannot get the file content
      */
     public void sendFile(File file, String roomName) throws IOException {
         MainClient.send(new GlobalMessage("message", new MessageRequest(roomName, "file", new FileMessageRequest(file.getName(), Files.readAllBytes(file.toPath())))));

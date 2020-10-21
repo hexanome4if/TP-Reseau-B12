@@ -22,10 +22,6 @@ public class RoomManagementPanel {
      */
     private final ChatController chatController;
     /**
-     * The current window
-     */
-    private final JFrame frame;
-    /**
      * Map of the room components with their name as key
      */
     private final Map<String, JPanel> roomEntries = new HashMap<>();
@@ -64,7 +60,6 @@ public class RoomManagementPanel {
     public RoomManagementPanel(ChatView chatView, ChatController chatController, JFrame frame) {
         this.chatView = chatView;
         this.chatController = chatController;
-        this.frame = frame;
 
         createComponents();
     }
