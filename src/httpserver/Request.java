@@ -191,7 +191,9 @@ public class Request {
     response = new AdminMiddleware().execute(this);
     if (response != null) return response;
 
-
+    if (path.equals("") || path.equals("/")) {
+      path = "index.html";
+    }
 
     AbstractHandle handler;
     switch (method) {
