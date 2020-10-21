@@ -2,13 +2,14 @@ package stream.client;
 
 import stream.core.GlobalMessage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ *
+ */
 public class SenderThread extends Thread {
 
     /**
@@ -19,10 +20,6 @@ public class SenderThread extends Thread {
      * Infinite loop manager
      */
     private boolean run = true;
-    /**
-     * User input reader
-     */
-    private BufferedReader stdIn = null;
     /**
      * Server output to send messages
      */
@@ -43,7 +40,6 @@ public class SenderThread extends Thread {
     @Override
     public void run() {
         try {
-            stdIn = new BufferedReader(new InputStreamReader(System.in));
             socOut = new ObjectOutputStream(echoSocket.getOutputStream());
 
             // Infinite loop to send messages
@@ -64,10 +60,10 @@ public class SenderThread extends Thread {
 
     /**
      * Call to clear streams and infinite loop when the client disconnect
-     * @throws IOException
+     * @throws IOException if an error occurred while closing socket output stream
      */
     public void disconnect() throws IOException {
-        stdIn.close();
+        run = false;
         socOut.close();
     }
 

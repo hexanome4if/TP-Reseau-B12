@@ -2,6 +2,9 @@ package stream.core.requests;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class TextMessageRequest implements Serializable {
     /**
      * The message content
@@ -16,6 +19,10 @@ public class TextMessageRequest implements Serializable {
         this.message = message;
     }
 
+    /**
+     * Get message content
+     * @return message content
+     */
     public String getMessage() {
         return message;
     }

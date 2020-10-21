@@ -5,6 +5,9 @@ import stream.client.controller.PseudoController;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ */
 public class PseudoView {
     /**
      * Pseudo controller to handle user actions

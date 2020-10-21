@@ -15,7 +15,10 @@ import java.util.concurrent.Semaphore;
  * @author polo
  */
 public class MainServer {
-    private static final String nomFichierSerialization = "history.ser";
+    /**
+     * History file name in which we will save the chat history
+     */
+    private static final String historySerializationFileName = "history.ser";
     /**
      * History of sent messages
      */
@@ -24,16 +27,15 @@ public class MainServer {
      * Lock to handle concurrency on the clients socket
      */
     private static final Semaphore socketLock = new Semaphore(1);
-
+    /**
+     * Output stream to save the history in a file
+     */
     private static ObjectOutputStream oos = null;
-    private static FileOutputStream fos = null;
-    private static ObjectInputStream ois = null;
-    private static FileInputStream fis = null;
 
     /**
      * Start a TCP server on the port specified as the first CLI argument
-     *
      * @param args CLI arguments
+     * @throws Exception if an error occurred while creating the server
      */
     public static void main(String[] args) throws Exception {
         // Check CLI arguments
@@ -46,8 +48,8 @@ public class MainServer {
 
         //On lit l'historique des messages
         try {
-            fis = new FileInputStream(nomFichierSerialization);
-            ois = new ObjectInputStream(fis);
+            FileInputStream fis = new FileInputStream(historySerializationFileName);
+            ObjectInputStream ois = new ObjectInputStream(fis);
 
             while (true) {
                 try {
@@ -73,10 +75,11 @@ public class MainServer {
      * Start a TCP server on the given port
      *
      * @param port the port the server should listen to
+     * @throws IOException if an error occurred while restoring the history
      */
     private static void startServer(int port) throws IOException {
 
-        fos = new FileOutputStream(nomFichierSerialization);
+        FileOutputStream fos = new FileOutputStream(historySerializationFileName);
         oos = new ObjectOutputStream(fos);
 
         for (GlobalMessage gm : history) {
@@ -110,7 +113,7 @@ public class MainServer {
      * @param message message to send
      * @param socket  client socket to ignore during broadcast
      */
-    public static void broadcastMessage(GlobalMessage message, Socket socket) throws IOException {
+    public static void broadcastMessage(GlobalMessage message, Socket socket) {
         try {
             socketLock.acquire();
             // Get every connected clients
@@ -129,12 +132,10 @@ public class MainServer {
                 oos.flush();
               }
             }*/
-            System.out.println("Will send message: " + message.getType());
             for (ClientData client : clients) {
                 // Check if the client is not the one which should be ignored
                 if (client.getSocket() != socket && client.getPseudo() != null) {
                     try {
-                        System.out.println("Send message: " + message.getType());
                         client.getOutputStream().writeObject(message); // Send the message
 
                     /*switch (message.getType()) {
@@ -196,14 +197,12 @@ public class MainServer {
      * @param socket the client to send the rooms to
      */
     public static void sendRooms(Socket socket) {
-        System.out.println("Send rooms");
         ClientData client = ClientContainer.getClient(socket);
         if (client == null) return;
         try {
             socketLock.acquire();
             try {
                 RoomManager.lockRooms();
-                System.out.println(RoomManager.rooms.size());
                 for(String room : RoomManager.rooms) {
                     try {
                         client.getOutputStream().writeObject(new GlobalMessage("room-new", new NewRoomInfo(room)));

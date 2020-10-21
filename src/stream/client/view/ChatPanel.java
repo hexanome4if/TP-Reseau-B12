@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ *
+ */
 public class ChatPanel {
 
     /**
@@ -596,9 +599,7 @@ public class ChatPanel {
         disconnectBTN.addActionListener(actionEvent -> chatController.disconnect());
 
         // Open room management panel on click
-        roomManagementBTN.addActionListener(actionEvent -> {
-            chatView.renderRoomManagementPanel();
-        });
+        roomManagementBTN.addActionListener(actionEvent -> chatView.renderRoomManagementPanel());
 
         // Send message on click on the send button
         sendMessageBTN.addActionListener(actionEvent -> {

@@ -11,22 +11,16 @@ import java.util.Map;
 public class ClientContainer {
     /**
      * Connected clients list
-     * @see ClientContainer#getClient(Socket)
-     * @see ClientContainer#getClients()
-     * @see ClientContainer#addClient(Socket)
-     * @see ClientContainer#removeClient(Socket)
      */
     private static final Map<String, ClientData> clients = new HashMap<>();
 
     /**
      * Add the new client to the list of connected clients
      * @param socket client socket
-     * @return Created ClientData
      */
-    public static synchronized ClientData addClient(Socket socket) {
+    public static synchronized void addClient(Socket socket) {
         ClientData clientData = new ClientData(socket);
         clients.put(getKey(socket), clientData);
-        return clientData;
     }
 
     /**

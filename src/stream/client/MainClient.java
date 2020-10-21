@@ -10,7 +10,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
-
+/**
+ *
+ */
 public class MainClient {
 
     /**
@@ -122,7 +124,6 @@ public class MainClient {
 
     /**
      * Disconnect client from server
-     * @throws IOException
      */
     public static void disconnect() {
         try {

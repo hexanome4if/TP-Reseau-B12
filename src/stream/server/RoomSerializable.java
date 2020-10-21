@@ -2,6 +2,9 @@ package stream.server;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class RoomSerializable implements Serializable {
     /**
      * The room name

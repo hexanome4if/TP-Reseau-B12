@@ -2,6 +2,9 @@ package stream.client.view.utils;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class ColorUtil {
     /**
      * Black color

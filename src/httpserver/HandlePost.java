@@ -1,3 +1,9 @@
+/**
+ * HandlePost
+ * Execute the POST request
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
+ */
 package httpserver;
 
 import java.io.BufferedWriter;
@@ -5,8 +11,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ *
+ */
 public class HandlePost extends AbstractHandle {
 
+    /**
+    * Execute the POST request
+    * @param request request received
+    **/
     @Override
     public Response execute(Request request) {
         File resource = getResource(request.getPath(), true);

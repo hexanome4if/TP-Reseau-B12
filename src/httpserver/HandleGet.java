@@ -1,10 +1,23 @@
+/**
+ * HandleGet
+ * Execute the GET request
+ * Date: 17/10/2020
+ * Authors: Paul Moine and Fabien Narboux
+ */
 package httpserver;
 
 import java.io.File;
 import java.nio.file.Files;
 
+/**
+ *
+ */
 public class HandleGet extends AbstractHandle {
 
+  /**
+  * Execute the GET request
+  * @param request request received
+  **/
   @Override
   public Response execute(Request request) {
     Response response = new Response();

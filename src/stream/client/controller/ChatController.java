@@ -15,6 +15,9 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class ChatController {
     /**
      * List of user rooms
@@ -48,6 +51,7 @@ public class ChatController {
     /**
      * Send a message from the user
      * @param message message to send
+     * @param roomName room name in which to send the message
      */
     public void sendMessage(String message, String roomName) {
         MainClient.send(new GlobalMessage("message", new MessageRequest(roomName, "text", new TextMessageRequest(message))));
@@ -59,7 +63,8 @@ public class ChatController {
     /**
      * Send a message containing a file
      * @param file the file to send
-     * @throws IOException
+     * @param roomName the room name in which to send the file message
+     * @throws IOException if we cannot get the file content
      */
     public void sendFile(File file, String roomName) throws IOException {
         MainClient.send(new GlobalMessage("message", new MessageRequest(roomName, "file", new FileMessageRequest(file.getName(), Files.readAllBytes(file.toPath())))));

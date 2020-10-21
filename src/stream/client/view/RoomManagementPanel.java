@@ -11,6 +11,9 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public class RoomManagementPanel {
 
     /**
@@ -21,10 +24,6 @@ public class RoomManagementPanel {
      * The chat control to handle user actions
      */
     private final ChatController chatController;
-    /**
-     * The current window
-     */
-    private final JFrame frame;
     /**
      * Map of the room components with their name as key
      */
@@ -64,7 +63,6 @@ public class RoomManagementPanel {
     public RoomManagementPanel(ChatView chatView, ChatController chatController, JFrame frame) {
         this.chatView = chatView;
         this.chatController = chatController;
-        this.frame = frame;
 
         createComponents();
     }
