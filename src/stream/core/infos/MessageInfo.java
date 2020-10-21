@@ -2,6 +2,9 @@ package stream.core.infos;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class MessageInfo implements Serializable {
     /**
      * Message type (can be text or file)

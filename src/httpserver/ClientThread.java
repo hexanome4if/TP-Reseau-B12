@@ -13,6 +13,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class ClientThread extends Thread {
 
     /**
@@ -57,7 +60,6 @@ public class ClientThread extends Thread {
                 } while (str.length() < 2 || str.charAt(str.length()-2) != '\r' || str.charAt(str.length()-1) != '\n' );
                 str = new StringBuilder(str.substring(0, str.length() - 2));
                 headers.add(str.toString());
-                System.out.println(str);
             }
             if (headers.size() == 0 || headers.get(0) == null) {
                 socket.close();
@@ -72,7 +74,6 @@ public class ClientThread extends Thread {
                 byteBody = inputStream.readNBytes(intContentLength);
             }
 
-            System.out.println("Body : ");
             if (byteBody != null) {
                 request.setBody(new String(byteBody));
                 request.setByteBody(byteBody);

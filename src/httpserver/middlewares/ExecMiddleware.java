@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class ExecMiddleware extends AbstractHandle {
 
     /**
@@ -38,7 +41,6 @@ public class ExecMiddleware extends AbstractHandle {
         }
         if (!executableCommand.equals("")) {
             executableCommand += " " + request.getMethod() + " " + request.getQueryString() + " \"" + request.getBody() + "\"";
-            System.out.println(executableCommand);
             try {
                 Process child = Runtime.getRuntime().exec(executableCommand);
                 child.waitFor();

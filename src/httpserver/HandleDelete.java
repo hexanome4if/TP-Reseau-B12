@@ -9,6 +9,9 @@ package httpserver;
 
 import java.io.File;
 
+/**
+ *
+ */
 public class HandleDelete extends AbstractHandle {
     /**
     * Execute the DELETE request

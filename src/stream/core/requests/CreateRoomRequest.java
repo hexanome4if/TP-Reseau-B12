@@ -2,6 +2,9 @@ package stream.core.requests;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class CreateRoomRequest implements Serializable {
     /**
      * The room name to create

@@ -6,6 +6,9 @@ import stream.core.GlobalMessage;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ */
 public class ChatView {
 
     /**

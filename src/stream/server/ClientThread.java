@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author Fabien & Paul
+ * @author Fabien - Paul
  */
 public class ClientThread extends Thread {
     /**
@@ -70,7 +70,6 @@ public class ClientThread extends Thread {
      * @param message the message sent by the client
      */
     private void handleMessage(GlobalMessage message) {
-        System.out.println("Received message: " + message.getType());
         switch (message.getType()) {
             case "join-room": {
                 JoinRoomRequest joinRoomRequest = (JoinRoomRequest)message.getData();

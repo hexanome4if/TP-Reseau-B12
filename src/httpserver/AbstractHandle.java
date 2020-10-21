@@ -3,6 +3,9 @@ package httpserver;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ *
+ */
 public abstract class AbstractHandle {
 
   /**

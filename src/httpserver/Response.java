@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public class Response {
 
   /**
@@ -100,7 +103,7 @@ public class Response {
 
   /**
   * set statusCode
-  * @param statusCode
+  * @param statusCode response http status code
   **/
   public void setStatusCode(int statusCode) {
     this.statusCode = statusCode;
@@ -116,7 +119,7 @@ public class Response {
 
   /**
   * set httpVersion
-  * @param httpVersion
+  * @param httpVersion response http version
   **/
   public void setHttpVersion(String httpVersion) {
     this.httpVersion = httpVersion;
@@ -140,14 +143,6 @@ public class Response {
   }
 
   /**
-  * set headers
-  * @param headers
-  **/
-  public void setHeaders(Map<String, String> headers) {
-    this.headers = headers;
-  }
-
-  /**
   * return body
   * @return body
   **/
@@ -157,7 +152,7 @@ public class Response {
 
   /**
   * set body
-  * @param body
+  * @param body response body as string
   **/
   public void setBody(String body) {
     this.body = body;
@@ -173,7 +168,7 @@ public class Response {
 
   /**
   * set byteBody
-  * @param byteBody
+  * @param byteBody response body as an array of bytes
   **/
   public void setByteBody(byte[] byteBody) {
     this.byteBody = byteBody;

@@ -2,6 +2,9 @@ package stream.core.requests;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class LeaveRoomRequest implements Serializable {
     /**
      * The room name to leave

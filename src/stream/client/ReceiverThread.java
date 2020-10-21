@@ -8,6 +8,9 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ *
+ */
 public class ReceiverThread extends Thread {
 
     /**

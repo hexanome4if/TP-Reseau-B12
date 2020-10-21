@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 
+/**
+ *
+ */
 public class ReceiverThread extends Thread {
 
     /**

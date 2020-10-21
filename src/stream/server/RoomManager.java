@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
+/**
+ *
+ */
 public class RoomManager {
     /**
      * Lock to handle concurrency on this class
@@ -23,13 +26,11 @@ public class RoomManager {
      * Initialize the room manager (get the saved rooms and open the object output stream)
      */
     public static void init() {
-        System.out.println("Init room manager");
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("rooms.ser"));
             while (true) {
                 try {
                     rooms.add(((RoomSerializable) ois.readObject()).getRoomName());
-                    System.out.println("Found a room");
                 } catch (EOFException ex) {
                     break;
                 }

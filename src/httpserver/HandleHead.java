@@ -6,6 +6,9 @@
  */
 package httpserver;
 
+/**
+ *
+ */
 public class HandleHead extends AbstractHandle {
 
     /**

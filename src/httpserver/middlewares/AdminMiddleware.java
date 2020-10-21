@@ -4,6 +4,9 @@ import httpserver.AbstractHandle;
 import httpserver.Request;
 import httpserver.Response;
 
+/**
+ *
+ */
 public class AdminMiddleware extends AbstractHandle {
     /**
      * Check if the resource is an admin resource and should be protected

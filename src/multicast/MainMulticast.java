@@ -11,8 +11,9 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-
-
+/**
+ *
+ */
 public class MainMulticast {
 
     /**
@@ -35,7 +36,7 @@ public class MainMulticast {
     /**
      * main method
      * Connection to the multicast group
-     *
+     * @param args CLI arguments
      * @throws IOException if an error occurred while connecting
      **/
     public static void main(String[] args) throws IOException {

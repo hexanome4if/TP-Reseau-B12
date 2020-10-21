@@ -132,12 +132,10 @@ public class MainServer {
                 oos.flush();
               }
             }*/
-            System.out.println("Will send message: " + message.getType());
             for (ClientData client : clients) {
                 // Check if the client is not the one which should be ignored
                 if (client.getSocket() != socket && client.getPseudo() != null) {
                     try {
-                        System.out.println("Send message: " + message.getType());
                         client.getOutputStream().writeObject(message); // Send the message
 
                     /*switch (message.getType()) {
@@ -199,14 +197,12 @@ public class MainServer {
      * @param socket the client to send the rooms to
      */
     public static void sendRooms(Socket socket) {
-        System.out.println("Send rooms");
         ClientData client = ClientContainer.getClient(socket);
         if (client == null) return;
         try {
             socketLock.acquire();
             try {
                 RoomManager.lockRooms();
-                System.out.println(RoomManager.rooms.size());
                 for(String room : RoomManager.rooms) {
                     try {
                         client.getOutputStream().writeObject(new GlobalMessage("room-new", new NewRoomInfo(room)));

@@ -7,6 +7,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ *
+ */
 public class SenderThread extends Thread {
 
     /**

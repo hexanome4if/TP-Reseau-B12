@@ -6,6 +6,9 @@ import stream.client.view.PseudoView;
 import stream.core.GlobalMessage;
 import stream.core.requests.ConnectRequest;
 
+/**
+ *
+ */
 public class PseudoController {
 
     /**

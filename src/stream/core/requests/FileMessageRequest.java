@@ -2,6 +2,9 @@ package stream.core.requests;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class FileMessageRequest implements Serializable {
     /**
      * The file name to send
