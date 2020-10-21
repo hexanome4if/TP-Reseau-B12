@@ -3,8 +3,9 @@ package stream.client;
 import stream.client.view.PseudoView;
 import stream.core.GlobalMessage;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;

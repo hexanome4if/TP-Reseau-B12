@@ -1,10 +1,12 @@
 package stream.client;
 
-import java.io.*;
-import java.net.*;
-
 import stream.client.controller.ChatController;
-import stream.core.*;
+import stream.core.GlobalMessage;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.net.SocketException;
 
 public class ReceiverThread extends Thread {
 

@@ -1,19 +1,40 @@
 package httpserver;
 
-import java.util.*;
+import httpserver.middlewares.AdminMiddleware;
+import httpserver.middlewares.ExecMiddleware;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Request {
 
-  private final String path;
+  private String path;
   private final String method;
   private final String httpVersion;
   private final Map<String,String> headers = new HashMap<>();
   private String body;
+  private byte[] byteBody;
+  private Map<String,String> queryParams = new HashMap<>();
+  private String queryString;
 
   public Request(List<String> headers) {
     String firstLine = headers.get(0);
     method = firstLine.split(" ")[0];
     path = firstLine.split(" ")[1];
+    if (path.split("\\?").length > 1) {
+      queryString = "?" + path.split("\\?", 2)[1];
+      String[] params = path.split("\\?", 2)[1].split("&");
+      path = path.split("\\?")[0];
+      for (String p : params) {
+        String key = p.split("=", 2)[0];
+        String value = "";
+        if (p.split("=", 2).length > 1) {
+          value = p.split("=", 2)[1];
+        }
+        queryParams.put(key, value);
+      }
+    }
     httpVersion = firstLine.split(" ")[2];
     headers.remove(0);
     for (String s : headers) {
@@ -55,7 +76,29 @@ public class Request {
     this.body = body;
   }
 
+  public byte[] getByteBody() {
+    return byteBody;
+  }
+
+  public void setByteBody(byte[] byteBody) {
+    this.byteBody = byteBody;
+  }
+
+  public String getQueryString() {
+    return queryString;
+  }
+
   public Response executeRequest() {
+    Response response;
+
+    response = new ExecMiddleware().execute(this);
+    if (response != null) return response;
+
+    response = new AdminMiddleware().execute(this);
+    if (response != null) return response;
+
+
+
     AbstractHandle handler;
     switch (method) {
       case "POST":

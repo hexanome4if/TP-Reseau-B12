@@ -4,7 +4,6 @@ import stream.client.controller.PseudoController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 
 public class PseudoView {
     /**
