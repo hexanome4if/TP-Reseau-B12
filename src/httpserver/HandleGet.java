@@ -2,7 +2,6 @@ package httpserver;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.util.*;
 
 public class HandleGet extends AbstractHandle {
 
@@ -15,7 +14,6 @@ public class HandleGet extends AbstractHandle {
 
     if (file != null)
     {
-
       try {
         String mimeType = Files.probeContentType(file.toPath());
 
